@@ -2,9 +2,11 @@
 import React from 'react'
 import './App.css'
 import * as firebase from 'firebase'
+import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom"
 
 //Components
 import TestComponent from "./components/testComponent"
+import SignupForm from "./components/signupForm"
 
 //Firebase config
 const firebaseConfig = {
@@ -21,7 +23,32 @@ firebase.initializeApp(firebaseConfig)
 
 function App() {
   return (
-    <TestComponent/> 
+    <Router>
+      <header>
+        <nav>
+          <ul>
+            <Link className="navlink" to="/">Home</Link>
+            <Link className="navlink" to="/signup">Signup</Link>
+          </ul>
+        </nav>
+      </header>
+
+      <Switch>
+
+        <Route path="/signup">
+          <SignupForm />
+        </Route>
+
+        <Route path="/login">
+          <TestComponent />
+        </Route>
+
+        <Route path="/">
+          <TestComponent />
+        </Route>
+
+      </Switch>
+    </Router>
   )
 }
 

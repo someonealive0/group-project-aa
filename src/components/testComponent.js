@@ -9,7 +9,16 @@ const TestComponent = () => {
         firebase.database().ref('users').on('value', (snapshot) => {
             snapshot.val() && setUsers(Object.values(snapshot.val()))
         })
+
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+              console.log("user is here", user)
+            } else {
+                console.log("no user")
+            }
+        });
     }, [])
+    
     return (
         <>
             <p>Test</p>
