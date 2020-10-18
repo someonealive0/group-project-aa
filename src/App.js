@@ -3,6 +3,7 @@ import React from 'react'
 import './App.css'
 import * as firebase from 'firebase'
 import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom"
+import Navbar from './components/Navbar'
 
 //Components
 import TestComponent from "./components/testComponent"
@@ -24,6 +25,7 @@ firebase.initializeApp(firebaseConfig)
 function App() {
   return (
     <Router>
+      <Navbar />
       <header>
         <nav>
           <ul>
