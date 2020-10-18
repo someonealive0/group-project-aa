@@ -1,6 +1,10 @@
 import React from 'react';
-import {useState} from 'react'
+import { useState } from 'react'
 import * as firebase from 'firebase'
+import Link from 'react-router-dom/Link';
+import Register from './Register';
+
+//Material UI
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -8,12 +12,10 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import Link  from 'react-router-dom/Link';
-import Register from './Register';
 
 const LoginForm = () => {
   const [open, setOpen] = useState(false);
-  
+  const [loginDetails, setLoginDetails] = useState({username: '', password: ''})
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -21,22 +23,21 @@ const LoginForm = () => {
 
   const handleClose = () => {
     setOpen(false);
-    setpassword('')
-    setusername('')
+    setLoginDetails({username: '', password: ''})
   };
 
   const handleSubmit = () => {
-    console.log({username, password});
+    console.log(loginDetails);
+    setLoginDetails({username: '', password: ''})
   }
-  const [username, setusername] = useState('')
-  const [password, setpassword] = useState('')
+
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Login
-      </Button>
+      <Button variant="outlined" color="primary" onClick={handleClickOpen}>Login</Button>
+      
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Login</DialogTitle>
+
         <DialogContent>
           <TextField
             autoFocus
@@ -44,35 +45,34 @@ const LoginForm = () => {
             id="name"
             label="Username"
             type="text"
-            value = {username}
+            value={loginDetails.username}
             fullWidth
-            onChange={(e) => setusername(e.target.value)}
+            onChange={(e) => setLoginDetails({...loginDetails, 'username': e.target.value})}
           />
-
 
           <TextField
             margin="dense"
             id="password"
             label="Password"
             type="password"
+            value={loginDetails.password}
             fullWidth
-            onChange={(e) => setpassword(e.target.value)}
+            onChange={(e) => setLoginDetails({...loginDetails, 'password': e.target.value})}
           />
         </DialogContent>
+
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={handleSubmit} color="primary">
-            Login
-          </Button>
+          <Button onClick={handleClose} color="primary">Cancel</Button>
+          <Button onClick={handleSubmit} color="primary">Login</Button>
         </DialogActions>
+
         <DialogContent>
-          <DialogContentText align='center'> New user?<Register /></DialogContentText>
-          </DialogContent>
+          <DialogContentText align='center'>New user?<Register /></DialogContentText>
+        </DialogContent>
+
       </Dialog>
     </div>
-  );
+  )
 }
 
 export default LoginForm
