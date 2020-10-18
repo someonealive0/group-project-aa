@@ -43,7 +43,7 @@ const Register = () => {
     //Validate username
     if (username.split(' ').length != 1 || username.match(regexUsername)[0] != username) {
       console.log("Invalid username")
-      alert("Username can't contain spaces")
+      alert("Invalid username")
       return
     }
 
@@ -60,7 +60,7 @@ const Register = () => {
     }
 
     firebase.auth().createUserWithEmailAndPassword(email, password).then(() => {
-      setSignupDetails({ 'username': '', 'password': '', 'email': '' })
+      setSignupDetails(initialState)
       setPasswordRepeat('')
     }).catch((error) => console.log(error.message))
   }
