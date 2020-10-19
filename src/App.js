@@ -3,12 +3,11 @@ import React from 'react'
 import './App.css'
 import * as firebase from 'firebase'
 import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom"
-import { useState, useEffect } from 'react'
 
 //Components
-import Navbar from './components/Navbar'
 import Home from './components/Home'
 import LandingPage from './components/LandingPage'
+import { CrashPage } from './components/CrashPage'
 
 //Firebase config
 const firebaseConfig = {
@@ -27,14 +26,13 @@ firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE)
 function App() {
   return (
     <Router>
-      <Navbar />
-
       <Switch>
         <Route path="/home">
           <Home />
         </Route>
         <Route path="/">
           <LandingPage />
+          {/* <CrashPage /> */}
         </Route>
       </Switch>
     </Router>

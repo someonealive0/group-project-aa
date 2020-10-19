@@ -14,40 +14,30 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 const LoginForm = () => {
-  const [open, setOpen] = useState(false);
-  const [loginDetails, setLoginDetails] = useState({username: '', password: ''})
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-    setLoginDetails({username: '', password: ''})
-  };
+  const [loginDetails, setLoginDetails] = useState({email: '', password: ''})
 
   const handleSubmit = () => {
     console.log(loginDetails);
-    setLoginDetails({username: '', password: ''})
+    firebase.auth().signInWithEmailAndPassword(loginDetails.email, loginDetails.password).then((result) => {
+      console.log("logged in")
+    }).catch((error) => console.log(error.message))
   }
 
   return (
-    <>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>Login</Button>
-      
-      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+    <>     
+      <Dialog open={true} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Login</DialogTitle>
 
         <DialogContent>
           <TextField
             autoFocus
             margin="dense"
-            id="name"
-            label="Username"
+            id="email"
+            label="Email"
             type="text"
-            value={loginDetails.username}
+            value={loginDetails.email}
             fullWidth
-            onChange={(e) => setLoginDetails({...loginDetails, 'username': e.target.value})}
+            onChange={(e) => setLoginDetails({...loginDetails, 'email': e.target.value})}
           />
 
           <TextField
@@ -62,10 +52,8 @@ const LoginForm = () => {
         </DialogContent>
 
         <DialogActions>
-          <Button onClick={handleClose} color="primary">Cancel</Button>
           <Button onClick={handleSubmit} color="primary">Login</Button>
         </DialogActions>
-
         <DialogContent>
           <DialogContentText align='center'>New user? <Register /></DialogContentText>
         </DialogContent>

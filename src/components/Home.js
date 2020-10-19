@@ -23,7 +23,9 @@ const Home = () => {
     return (
         <>
             {console.log("home user (shouldn't be null)", user)}
+            <h1>Signed in as {user.uid}</h1> <p></p>
             <button onClick={() => testService.test().then(result => console.log(result))}>Log a test message</button>
+            <button onClick={() => firebase.auth().signOut()}>Log out</button>
         </>
     )
 }

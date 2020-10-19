@@ -3,6 +3,9 @@ import testService from '../services/testService'
 import * as firebase from 'firebase'
 import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom"
 
+//Components
+import LoginForm from './LoginForm';
+
 const LandingPage = () => {
     const [user, setUser] = useState(null)
 
@@ -22,7 +25,7 @@ const LandingPage = () => {
     return (
         <>
             {console.log("lp user (should be null)", user)}
-            <p>Landing page (sign in form goes here)</p>
+            <LoginForm />
         </>
     )
 }
