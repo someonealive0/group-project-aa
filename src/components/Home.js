@@ -7,7 +7,7 @@ const Home = () => {
     const [user, setUser] = useState(undefined)
 
     useEffect(() => {
-        firebase.auth().onAuthStateChanged((authState) => {
+        const unsubscribe = firebase.auth().onAuthStateChanged((authState) => {
             if (authState) {
                 console.log("Signed in as", authState)
                 setUser(authState)
@@ -15,7 +15,10 @@ const Home = () => {
                 console.log("No user", user)
                 setUser(null)
             }
-        });
+
+        })
+        
+        return () => unsubscribe()
     }, [])
 
     if (user === undefined) return (<></>) //User hasn't initialised yet

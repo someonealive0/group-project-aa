@@ -10,7 +10,7 @@ const LandingPage = () => {
     const [user, setUser] = useState(null)
 
     useEffect(() => {
-        firebase.auth().onAuthStateChanged((authState) => {
+        const unsubscribe = firebase.auth().onAuthStateChanged((authState) => {
             if (authState) {
                 console.log("Signed in as", authState)
                 setUser(authState)
@@ -18,7 +18,10 @@ const LandingPage = () => {
                 console.log("No user", user)
                 setUser(null)
             }
-        });
+
+        })
+        
+        return () => unsubscribe()
     }, [])
 
     if (user !== null) return (<Redirect to="/home" />) //Redirect if user logged in
