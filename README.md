@@ -2,7 +2,7 @@
 
 ## Running the server
 
-## Initialisation
+### Initialisation
 Run `npm install` from within the root directory *and* in the `functions` directory (this is a side-effect of how firebase manages deployment). Then make a `.env` file in the root directory which appropriately mimics the `.env.sample` file provided (*this is currently empty*). Then run `npm build` from the root directory.
 
 ### Express/Firebase Back-End
@@ -14,3 +14,6 @@ Use the command `npm start` to run the React server. Default port is 3000. Make 
 
 ## Deployment
 Use the command `npm run deploy` to deploy the app to firebase. You will likely get a prompt to sign into firebase with your google account first (group members use student emails for correct permissions).
+
+## TODO
+* Implement firebase access rules

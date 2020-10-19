@@ -60,10 +60,28 @@ const Register = () => {
       return
     }
 
-    firebase.auth().createUserWithEmailAndPassword(email, password).then(() => {
-      setSignupDetails(initialState)
-      setPasswordRepeat('')
-    }).catch((error) => console.log(error.message))
+    //Check if username is free, then create user and store them in firebase
+    const dbRef = firebase.database().ref('users').child(username.toLowerCase())
+    dbRef.once('value', (snapshot) => {
+      if (!snapshot.exists()) {
+        firebase.auth().createUserWithEmailAndPassword(email, password).then((result) => {
+          dbRef.set({
+            uid: result.user.uid,
+            username: username,
+            email: email,
+          })
+
+          setSignupDetails(initialState)
+          setPasswordRepeat('')
+        }).catch((error) => console.log(error.message))
+      } else {
+        console.log("Username taken")
+        alert("Username taken")
+        return
+      }
+    })
+
+
   }
 
   return (
