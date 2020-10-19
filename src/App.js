@@ -7,7 +7,6 @@ import Navbar from './components/Navbar'
 
 //Components
 import TestComponent from "./components/testComponent"
-import SignupForm from "./components/signupForm"
 
 //Firebase config
 const firebaseConfig = {
@@ -30,25 +29,14 @@ function App() {
         <nav>
           <ul>
             <Link className="navlink" to="/">Home</Link>
-            <Link className="navlink" to="/signup">Signup</Link>
           </ul>
         </nav>
       </header>
 
       <Switch>
-
-        <Route path="/signup">
-          <SignupForm />
-        </Route>
-
-        <Route path="/login">
-          <TestComponent />
-        </Route>
-
         <Route path="/">
           <TestComponent />
         </Route>
-
       </Switch>
     </Router>
   )

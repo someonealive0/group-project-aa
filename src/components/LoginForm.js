@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react'
 import * as firebase from 'firebase'
-import Link from 'react-router-dom/Link';
+import { Redirect, Link } from 'react-router-dom';
 import Register from './Register';
 
 //Material UI
@@ -32,7 +32,7 @@ const LoginForm = () => {
   }
 
   return (
-    <div>
+    <>
       <Button variant="outlined" color="primary" onClick={handleClickOpen}>Login</Button>
       
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
@@ -67,11 +67,11 @@ const LoginForm = () => {
         </DialogActions>
 
         <DialogContent>
-          <DialogContentText align='center'>New user?<Register /></DialogContentText>
+          <DialogContentText align='center'>New user? <Register /></DialogContentText>
         </DialogContent>
 
       </Dialog>
-    </div>
+    </>
   )
 }
 

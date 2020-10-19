@@ -3,18 +3,18 @@ import testService from '../services/testService'
 import * as firebase from 'firebase'
 
 const TestComponent = () => {
-    const [users, setUsers] = useState([])
+    const [users, setUsers] = useState()
 
     useEffect(() => {
         firebase.database().ref('users').on('value', (snapshot) => {
-            snapshot.val() && setUsers(Object.values(snapshot.val()))
+            console.log(users)
         })
 
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
-              console.log("user is here", user)
+              console.log("User signed in", user)
             } else {
-                console.log("no user")
+                console.log("User signed out")
             }
         });
     }, [])
@@ -23,7 +23,6 @@ const TestComponent = () => {
         <>
             <p>Test</p>
             <button onClick={() => testService.test().then(result => console.log(result))}>Log a test message</button>
-            <button onClick={() => console.log(users)}>Log a test message</button>
         </>
     )
 }

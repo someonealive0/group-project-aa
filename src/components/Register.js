@@ -19,7 +19,8 @@ const Register = () => {
   const [passwordRepeat, setPasswordRepeat] = useState('')
   const regexUsername = /(\w+)/g
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (event) => {
+    event.preventDefault()
     setOpen(true);
   };
 
@@ -66,8 +67,8 @@ const Register = () => {
   }
 
   return (
-    <div>
-      <Link onClick={handleClickOpen}>Register</Link>
+    <>
+      <a href="#" onClick={handleClickOpen}>Register</a>
 
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Register</DialogTitle>
@@ -76,7 +77,7 @@ const Register = () => {
           <TextField
             autoFocus
             margin="dense"
-            id="name"
+            id="username"
             label="Username"
             type="text"
             value={signupDetails.username}
@@ -86,7 +87,7 @@ const Register = () => {
 
           <TextField
             margin="dense"
-            id="name"
+            id="email"
             label="Email"
             type="text"
             value={signupDetails.email}
@@ -106,7 +107,7 @@ const Register = () => {
 
           <TextField
             margin="dense"
-            id="password"
+            id="passwordRepeat"
             label="Confirm Password"
             type="password"
             value={passwordRepeat}
@@ -116,16 +117,12 @@ const Register = () => {
         </DialogContent>
 
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={handleSubmit} color="primary">
-            Register
-          </Button>
+          <Button onClick={handleClose} color="primary">Cancel</Button>
+          <Button onClick={handleSubmit} color="primary">Register</Button>
         </DialogActions>
 
       </Dialog>
-    </div>
+    </>
   );
 }
 
