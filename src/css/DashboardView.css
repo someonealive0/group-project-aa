@@ -1,0 +1,60 @@
+html,
+body {
+    height: 100%;
+    margin: 0px;
+}
+
+.dbWrapper {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.dbHeader {
+    margin: 0;
+    padding: 0;
+    background-color: rgb(32, 34, 37);
+    height: 20px;
+}
+
+.dbMainContent {
+    margin: 0;
+    padding: 0;
+    background-color: rgb(32, 34, 37);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.dbGroupIconList {
+    margin: 0;
+    padding: 0;
+    width: 5.625%;
+    background-color: rgb(32, 34, 37);
+    height: 100%;
+}
+
+.dbChannelCol {
+    margin: 0;
+    padding: 0;
+    background-color: rgb(47, 49, 54);
+    width: 18.75%;
+    border-radius: 10px 0 0 0;
+}
+
+.dbMessagesCol {
+    margin: 0;
+    padding: 0;
+    background-color: rgb(54, 57, 63);
+    width: 57%;
+}
+
+.dbFriendsCol {
+    margin: 0;
+    padding: 0;
+    width: 18.625%;
+    background-color: rgb(47, 49, 54);
+}

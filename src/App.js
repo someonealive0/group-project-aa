@@ -1,6 +1,6 @@
 //Libraries
 import React from 'react'
-import './App.css'
+import './css/App.css'
 import * as firebase from 'firebase'
 import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom"
 
@@ -8,6 +8,8 @@ import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-ro
 import Home from './components/Home'
 import LandingPage from './components/LandingPage'
 import { CrashPage } from './components/CrashPage'
+import DashboardView from './components/DashboardView'
+
 
 //Firebase config
 const firebaseConfig = {
@@ -21,12 +23,15 @@ const firebaseConfig = {
   measurementId: "G-6PN2Y3BZ3Y"
 }
 firebase.initializeApp(firebaseConfig)
-firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE)
+firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
 
 function App() {
   return (
     <Router>
       <Switch>
+        <Route path="/dashboard">
+          <DashboardView />
+        </Route>
         <Route path="/home">
           <Home />
         </Route>

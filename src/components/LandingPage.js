@@ -18,9 +18,7 @@ const LandingPage = () => {
                 console.log("No user", user)
                 setUser(null)
             }
-
         })
-        
         return () => unsubscribe()
     }, [])
 

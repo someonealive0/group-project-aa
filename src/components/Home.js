@@ -15,9 +15,7 @@ const Home = () => {
                 console.log("No user", user)
                 setUser(null)
             }
-
         })
-        
         return () => unsubscribe()
     }, [])
 
@@ -29,6 +27,7 @@ const Home = () => {
             <h1>Signed in as {user.uid}</h1> <p></p>
             <button onClick={() => testService.test().then(result => console.log(result))}>Log a test message</button>
             <button onClick={() => firebase.auth().signOut()}>Log out</button>
+            <Link to="/dashboard">Dashboard</Link>
         </>
     )
 }
