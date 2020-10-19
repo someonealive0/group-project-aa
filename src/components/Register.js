@@ -86,7 +86,7 @@ const Register = () => {
 
   return (
     <>
-      <a href="#" onClick={handleClickOpen}>Register</a>
+      <Button color='secondary' variant='contained' onClick={handleClickOpen}>Register</Button>
 
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Register</DialogTitle>

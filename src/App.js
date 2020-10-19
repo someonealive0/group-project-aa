@@ -7,6 +7,7 @@ import Navbar from './components/Navbar'
 
 //Components
 import TestComponent from "./components/testComponent"
+import { CrashPage } from './components/CrashPage'
 
 //Firebase config
 const firebaseConfig = {
@@ -23,6 +24,7 @@ firebase.initializeApp(firebaseConfig)
 
 function App() {
   return (
+    <div>
     <Router>
       <Navbar />
       <header>
@@ -32,13 +34,14 @@ function App() {
           </ul>
         </nav>
       </header>
-
+      <CrashPage/>
       <Switch>
         <Route path="/">
           <TestComponent />
         </Route>
       </Switch>
     </Router>
+    </div>
   )
 }
 
