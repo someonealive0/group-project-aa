@@ -3,11 +3,12 @@ import React from 'react'
 import './App.css'
 import * as firebase from 'firebase'
 import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom"
-import Navbar from './components/Navbar'
+import { useState, useEffect } from 'react'
 
 //Components
-import TestComponent from "./components/testComponent"
-import { CrashPage } from './components/CrashPage'
+import Navbar from './components/Navbar'
+import Home from './components/Home'
+import LandingPage from './components/LandingPage'
 
 //Firebase config
 const firebaseConfig = {
@@ -21,27 +22,22 @@ const firebaseConfig = {
   measurementId: "G-6PN2Y3BZ3Y"
 }
 firebase.initializeApp(firebaseConfig)
+firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE)
 
 function App() {
   return (
-    <div>
     <Router>
       <Navbar />
-      <header>
-        <nav>
-          <ul>
-            <Link className="navlink" to="/">Home</Link>
-          </ul>
-        </nav>
-      </header>
-      <CrashPage/>
+
       <Switch>
+        <Route path="/home">
+          <Home />
+        </Route>
         <Route path="/">
-          <TestComponent />
+          <LandingPage />
         </Route>
       </Switch>
     </Router>
-    </div>
   )
 }
 

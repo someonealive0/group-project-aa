@@ -60,6 +60,7 @@ const Register = () => {
       return
     }
 
+    console.log("checkign username")
     //Check if username is free, then create user and store them in firebase
     const dbRef = firebase.database().ref('users').child(username.toLowerCase())
     dbRef.once('value', (snapshot) => {
@@ -73,6 +74,7 @@ const Register = () => {
 
           setSignupDetails(initialState)
           setPasswordRepeat('')
+          console.log("signed up")
         }).catch((error) => console.log(error.message))
       } else {
         console.log("Username taken")
@@ -80,8 +82,6 @@ const Register = () => {
         return
       }
     })
-
-
   }
 
   return (
