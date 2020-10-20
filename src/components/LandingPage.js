@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react'
 import testService from '../services/testService'
 import * as firebase from 'firebase'
 import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom"
-
 //Components
 import LoginForm from './LoginForm';
+import Spinner from './Spinner';
 
 const LandingPage = () => {
     const [user, setUser] = useState(null)
@@ -26,7 +26,9 @@ const LandingPage = () => {
     return (
         <>
             {console.log("lp user (should be null)", user)}
+            <Spinner />
             <LoginForm />
+            
         </>
     )
 }
