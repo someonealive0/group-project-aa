@@ -59,11 +59,54 @@ body {
     border-radius: 10px 0 0 0;
 }
 
+.dbGroupName {
+    margin: 20px 0 25px 25px;
+    padding: 0;
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
 .dbChannelList {
     margin: 0;
     padding: 0;
     width: 100%;
     flex-grow: 1;
+}
+
+.dbChannelListItem {
+    margin: 3px 0 3px 0;
+    padding: 0;
+    list-style-type: none;
+    height: 48px;
+    width: 100%;
+}
+
+.dbChannel {
+    margin: 0 12px 0 12px;
+    padding: 0;
+    background-color: darkgray;
+    border-radius: 5px;
+    height: 100%;
+    width: auto;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+}
+
+.dbChannelIcon {
+    margin: 0 ;
+    padding: 0;
+    width: 51px;
+    font-size: 2rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+.dbChannelName {
+    margin: 0 ;
+    padding: 0;
+    flex-grow: 1;
+    font-size: 1.4rem;
 }
 
 .dbUserInfo {

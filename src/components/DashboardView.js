@@ -6,6 +6,7 @@ import '../css/DashboardView.css'
 const MessageView = () => {
     const [user, setUser] = useState(undefined)
     const testChannelNames = ["general", "meme", "uni chat"]
+    const testGroupName = "COMP3160 Group Project" //Should be <= 22 chars
 
     useEffect(() => {
         const unsubscribe = firebase.auth().onAuthStateChanged((authState) => {
@@ -28,8 +29,19 @@ const MessageView = () => {
                 <div className="dbGroupIconList"></div>
 
                 <div className="dbChannelCol">
-                    <div className="dbColHeader"></div>
-                    <div className="dbChannelList"></div>
+                    <div className="dbColHeader">
+                        <p className="dbGroupName">{testGroupName}</p>
+                    </div>
+                    <ul className="dbChannelList">
+                        {testChannelNames.map((channel) => (
+                            <li className="dbChannelListItem">
+                                <div className="dbChannel">
+                                    <span className="dbChannelIcon">#</span>
+                                    <span className="dbChannelName">{channel}</span>
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
                     <div className="dbUserInfo"></div>
                 </div>
                 <div className="dbMessagesCol">
