@@ -84,13 +84,17 @@ body {
 .dbChannel {
     margin: 0 12px 0 12px;
     padding: 0;
-    background-color: darkgray;
     border-radius: 5px;
     height: 100%;
     width: auto;
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
+    color: rgb(114, 118, 125);
+}
+
+.dbChannel:hover {
+    background-color: rgb(52, 55, 60);
 }
 
 .dbChannelIcon {
@@ -107,6 +111,10 @@ body {
     padding: 0;
     flex-grow: 1;
     font-size: 1.4rem;
+}
+
+.dbChannel:hover .dbChannelName {
+    color: rgb(220, 221, 222);
 }
 
 .dbUserInfo {
