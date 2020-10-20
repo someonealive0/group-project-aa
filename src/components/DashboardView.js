@@ -5,6 +5,7 @@ import '../css/DashboardView.css'
 
 const MessageView = () => {
     const [user, setUser] = useState(undefined)
+    const testChannelNames = ["general", "meme", "uni chat"]
 
     useEffect(() => {
         const unsubscribe = firebase.auth().onAuthStateChanged((authState) => {
@@ -27,11 +28,18 @@ const MessageView = () => {
                 <div className="dbGroupIconList"></div>
 
                 <div className="dbChannelCol">
+                    <div className="dbColHeader"></div>
                     <div className="dbChannelList"></div>
                     <div className="dbUserInfo"></div>
                 </div>
-                <div className="dbMessagesCol"></div>
-                <div className="dbFriendsCol"></div>
+                <div className="dbMessagesCol">
+                    <div className="dbColHeader"></div>
+                    <div className="dbMsgList"></div>
+                    <div className="dbSubmitMsg"></div>
+                </div>
+                <div className="dbFriendsCol">
+                    <div className="dbColHeader"></div>
+                </div>
             </div>
         </div>
     )
