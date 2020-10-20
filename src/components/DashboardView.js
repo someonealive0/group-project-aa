@@ -23,7 +23,9 @@ const MessageView = () => {
     }, [])
 
     if (user === null) return (<Redirect to="/" />) //Redirect to landing page if user logged out
+
     if (user === undefined) return (<></>) //User hasn't initialised yet
+
     return (
         <div className="dbWrapper">
             <div className="dbHeader">Discord (sort of)</div>

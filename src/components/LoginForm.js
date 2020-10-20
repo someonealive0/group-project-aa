@@ -22,7 +22,6 @@ const LoginForm = () => {
   const [showForm, setShowForm] = useState(false)
   const classes = styles();
   const [loginDetails, setLoginDetails] = useState({ email: "", password: "" });
-  
   const handleSubmit = () => {
     console.log(loginDetails);
     firebase
@@ -74,6 +73,7 @@ const LoginForm = () => {
             <Button
               onClick={handleSubmit}
               color="primary"
+              variant='contained'
               className={classes.submitBtn}
             >
               Login

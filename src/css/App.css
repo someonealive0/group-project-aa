@@ -46,3 +46,22 @@ body {
         transform: scale(0, 0);
     }
 }
+
+.loading {
+    background-color: #000000;
+    animation: fadeAnimation 5s;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+}
+
+@keyframes fadeAnimation {
+    from {
+        opacity: 1;
+        display: 'block'
+    }
+    to {
+        opacity: 0;
+        display: none;
+    }
+}
