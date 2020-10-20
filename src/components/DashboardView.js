@@ -7,6 +7,7 @@ const MessageView = () => {
     const [user, setUser] = useState(undefined)
     const testChannelNames = ["general", "meme", "uni chat"]
     const testGroupName = "COMP3160 Group Project" //Should be <= 22 chars
+    const testChannelDescription = "This is a description for the COMP3160 channel"
 
     useEffect(() => {
         const unsubscribe = firebase.auth().onAuthStateChanged((authState) => {
@@ -45,7 +46,13 @@ const MessageView = () => {
                     <div className="dbUserInfo"></div>
                 </div>
                 <div className="dbMessagesCol">
-                    <div className="dbColHeader"></div>
+                    <div className="dbColHeader">
+                        <div className="dbCurrentChannel">
+                            <span className="dbChannelIcon">#</span>
+                            <span className="dbChannelName">{testChannelNames[0]}</span>
+                            <span className="dbChannelDesc">{testChannelDescription}</span>
+                        </div>
+                    </div>
                     <div className="dbMsgList"></div>
                     <div className="dbSubmitMsg"></div>
                 </div>

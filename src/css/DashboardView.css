@@ -98,7 +98,7 @@ body {
 }
 
 .dbChannelIcon {
-    margin: 0 ;
+    margin: 0;
     padding: 0;
     width: 51px;
     font-size: 2rem;
@@ -111,10 +111,11 @@ body {
     padding: 0;
     flex-grow: 1;
     font-size: 1.4rem;
+    font-weight: 500;
 }
 
 .dbChannel:hover .dbChannelName {
-    color: rgb(220, 221, 222);
+    color:white;
 }
 
 .dbUserInfo {
@@ -133,6 +134,34 @@ body {
     flex-grow: 1;
     display: flex;
     flex-flow: column nowrap;
+}
+
+.dbCurrentChannel {
+    width: fit-content;
+    height: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    font-weight: 500;
+}
+
+.dbCurrentChannel .dbChannelIcon {
+    margin-left: 20px;
+    margin-right: 10px;
+    color: rgb(114, 118, 125);
+    font-size: 2.75rem;
+}
+
+.dbChannelDesc {
+    margin: 0;
+    margin-left: 20px;
+    padding: 5px 0px 5px 10px;
+    width: 100%;
+    height: auto;
+    text-align: center;
+    font-size: 1.2rem;
+    border-left: 1px solid white;
+    color: rgb(114, 118, 125);
 }
 
 .dbMsgList {
