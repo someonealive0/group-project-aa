@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, createContext } from 'react'
 import testService from '../services/testService'
 import * as firebase from 'firebase'
 import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom"
@@ -8,7 +8,7 @@ import Spinner from './Spinner';
 
 const LandingPage = () => {
     const [user, setUser] = useState(null)
-
+    const userAuth = createContext()
     useEffect(() => {
         const unsubscribe = firebase.auth().onAuthStateChanged((authState) => {
             if (authState) {

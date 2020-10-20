@@ -22,6 +22,9 @@ const MessageView = () => {
     }, [])
 
     if (user === null) return (<Redirect to="/" />) //Redirect to landing page if user logged out
+    if (user === undefined){
+        console.log('undefined');
+    }
     return (
         <div className="dbWrapper">
             <div className="dbHeader">Discord (sort of)</div>
