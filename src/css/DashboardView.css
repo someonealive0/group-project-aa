@@ -16,7 +16,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: rgb(32, 34, 37);
-    height: 20px;
+    height: 32px;
 }
 
 .dbMainContent {
@@ -32,7 +32,7 @@ body {
 .dbGroupIconList {
     margin: 0;
     padding: 0;
-    width: 5.625%;
+    width: 107px;
     background-color: rgb(32, 34, 37);
     height: 100%;
 }
@@ -41,20 +41,122 @@ body {
     margin: 0;
     padding: 0;
     background-color: rgb(47, 49, 54);
-    width: 18.75%;
+    width: 360px;
     border-radius: 10px 0 0 0;
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.dbColHeader {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 72px;
+    border-bottom: 1px solid rgb(32, 34, 37);
+}
+
+.dbChannelCol .dbColHeader {
+    border-radius: 10px 0 0 0;
+}
+
+.dbGroupName {
+    margin: 20px 0 25px 25px;
+    padding: 0;
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.dbChannelList {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    flex-grow: 1;
+}
+
+.dbChannelListItem {
+    margin: 3px 0 3px 0;
+    padding: 0;
+    list-style-type: none;
+    height: 48px;
+    width: 100%;
+}
+
+.dbChannel {
+    margin: 0 12px 0 12px;
+    padding: 0;
+    border-radius: 5px;
+    height: 100%;
+    width: auto;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    color: rgb(114, 118, 125);
+}
+
+.dbChannel:hover {
+    background-color: rgb(52, 55, 60);
+}
+
+.dbChannelIcon {
+    margin: 0 ;
+    padding: 0;
+    width: 51px;
+    font-size: 2rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+.dbChannelName {
+    margin: 0 ;
+    padding: 0;
+    flex-grow: 1;
+    font-size: 1.4rem;
+}
+
+.dbChannel:hover .dbChannelName {
+    color: rgb(220, 221, 222);
+}
+
+.dbUserInfo {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background-color: rgb(41, 43, 47);
+    height: 80px;
+    border-top: 3px solid rgb(54, 55, 59);
 }
 
 .dbMessagesCol {
     margin: 0;
     padding: 0;
     background-color: rgb(54, 57, 63);
-    width: 57%;
+    flex-grow: 1;
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.dbMsgList {
+    margin: 0;
+    padding: 0;
+    flex-grow: 1;
+}
+
+.dbSubmitMsg {
+    margin: 0 25px 36px 25px;
+    padding: 0;
+    margin-bottom: 36px;
+    height: 66px;
+    background-color: rgb(64, 68, 75);
+    border-radius: 8px;
 }
 
 .dbFriendsCol {
     margin: 0;
     padding: 0;
-    width: 18.625%;
+    width: 360px;
     background-color: rgb(47, 49, 54);
+}
+
+.dbFriendsCol .dbColHeader {
+    background-color: rgb(54, 57, 63);
 }
