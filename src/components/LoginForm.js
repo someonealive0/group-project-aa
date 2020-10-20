@@ -74,6 +74,7 @@ const LoginForm = () => {
             <Button
               onClick={handleSubmit}
               color="primary"
+              variant='contained'
               className={classes.submitBtn}
             >
               Login
