@@ -6,7 +6,7 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background-image: radial-gradient(#7289da, rgb(54, 57, 63));
-    color: whitesmoke;
+    color: white;
     margin-bottom: 60px;
     font-size: 1rem;
 }

@@ -7,6 +7,7 @@ const MessageView = () => {
     const [user, setUser] = useState(undefined)
     const testChannelNames = ["general", "meme", "uni chat"]
     const testGroupName = "COMP3160 Group Project" //Should be <= 22 chars
+    const testChannelDescription = "This is a description for the general channel"
 
     useEffect(() => {
         const unsubscribe = firebase.auth().onAuthStateChanged((authState) => {
@@ -22,9 +23,9 @@ const MessageView = () => {
     }, [])
 
     if (user === null) return (<Redirect to="/" />) //Redirect to landing page if user logged out
-    if (user === undefined){
-        console.log('undefined');
-    }
+
+    if (user === undefined) return (<></>) //User hasn't initialised yet
+
     return (
         <div className="dbWrapper">
             <div className="dbHeader">Discord (sort of)</div>
@@ -45,10 +46,19 @@ const MessageView = () => {
                             </li>
                         ))}
                     </ul>
-                    <div className="dbUserInfo"></div>
+                    <div className="dbUserInfo">
+                        <div className="dbUserImg"><img src={"/smile.png"}></img></div>
+                        <span className="dbUsername">{user.uid}</span>
+                    </div>
                 </div>
                 <div className="dbMessagesCol">
-                    <div className="dbColHeader"></div>
+                    <div className="dbColHeader">
+                        <div className="dbCurrentChannel">
+                            <span className="dbChannelIcon">#</span>
+                            <span className="dbChannelName">{testChannelNames[0]}</span>
+                            <span className="dbChannelDesc">{testChannelDescription}</span>
+                        </div>
+                    </div>
                     <div className="dbMsgList"></div>
                     <div className="dbSubmitMsg"></div>
                 </div>
