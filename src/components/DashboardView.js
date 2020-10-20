@@ -49,6 +49,7 @@ const MessageView = () => {
                         <span className="dbUsername">{user.uid}</span>
                     </div>
                 </div>
+
                 <div className="dbMessagesCol">
                     <div className="dbColHeader">
                         <div className="dbCurrentChannel">
@@ -60,7 +61,8 @@ const MessageView = () => {
                     <div className="dbMsgList"></div>
                     <div className="dbSubmitMsg"></div>
                 </div>
-                <div className="dbFriendsCol">
+
+                <div className="dbUsersCol">
                     <div className="dbColHeader"></div>
                 </div>
             </div>

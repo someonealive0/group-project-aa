@@ -205,13 +205,13 @@ body {
     border-radius: 8px;
 }
 
-.dbFriendsCol {
+.dbUsersCol {
     margin: 0;
     padding: 0;
     width: 360px;
     background-color: rgb(47, 49, 54);
 }
 
-.dbFriendsCol .dbColHeader {
+.dbUsersCol .dbColHeader {
     background-color: rgb(54, 57, 63);
 }
