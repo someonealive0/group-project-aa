@@ -1,0 +1,101 @@
+{
+    "userdata": {
+        "uid1": {
+            "username": "Bobalooba",
+            "profileImg": "http://robohash.org/bob",
+            "groups": []
+        },
+        "uid2": {
+            "username": "Jimbulator",
+            "profileImg": "http://robohash.org/jim",
+            "groups": []
+        },
+        "uid3": {
+            "username": "Contrary",
+            "profileImg": "http://robohash.org/mary",
+            "groups": []
+        },
+        "uid4": {
+            "username": "Mandible",
+            "profileImg": "http://robohash.org/bob",
+            "groups": []
+        }
+    },
+    "users": {
+        "Bobalooba": true,
+        "Jimbulator": true,
+        "Contrary": true,
+        "Mandible": true
+    },
+    "groupdata": {
+        "groupid1": {
+            "name": "COMP3160 Group Project",
+            "groupImg": "http://robohash.org/COMP3160_Group_Project",
+            "members": ["uid1", "uid2", "uid3", "uid4"],
+            "channels": {
+                "channelid1": "general",
+                "channelid2": "memes",
+                "channelid3": "uni stuff"
+            }
+        },
+        "groupid2": {
+            "name": "Test group",
+            "groupImg": "http://robohash.org/Test_group",
+            "members": ["uid2", "uid4"],
+            "channels": {
+                "channelid4": "general",
+                "channelid5": "cool stuff"
+            }
+        }
+    },
+    "messages": {
+        "channelid1": [
+            {
+                "content": "This is a message by user 1",
+                "user": "ud1",
+                "time": "timestamp"
+            },
+            {
+                "content": "This is a message by user 4",
+                "user": "ud4",
+                "time": "timestamp"
+            }
+        ],
+        "channelid2": [
+            {
+                "content": "This is a message by user 2",
+                "user": "ud2",
+                "time": "timestamp"
+            },
+            {
+                "content": "This is a message by user 3",
+                "user": "ud3",
+                "time": "timestamp"
+            }
+        ],
+        "channelid4": [
+            {
+                "content": "This is a message by user 2",
+                "user": "ud2",
+                "time": "timestamp"
+            },
+            {
+                "content": "This is a message by user 3",
+                "user": "ud3",
+                "time": "timestamp"
+            }
+        ],
+        "channelid5": [
+            {
+                "content": "This is a message by user 4",
+                "user": "ud2",
+                "time": "timestamp"
+            },
+            {
+                "content": "This is a message by user 2",
+                "user": "ud3",
+                "time": "timestamp"
+            }
+        ]
+    }
+}

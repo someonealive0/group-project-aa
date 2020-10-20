@@ -3,11 +3,33 @@ import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-ro
 import * as firebase from 'firebase'
 import '../css/DashboardView.css'
 
-const MessageView = () => {
+const DashboardView = () => {
     const [user, setUser] = useState(undefined)
     const testChannelNames = ["general", "meme", "uni chat"]
     const testGroupName = "COMP3160 Group Project" //Should be <= 22 chars
     const testChannelDescription = "This is a description for the general channel"
+    const testMessageList = [
+        {
+            "content": "This is a message by user C",
+            "user": "Mandible",
+            "time": "10/18/2020"
+        },
+        {
+            "content": "This is a message by user D",
+            "user": "Jean Tarrou",
+            "time": "10/19/2020"
+        },
+        {
+            "content": "This is a message by user A",
+            "user": "someonealive",
+            "time": "10/20/2020"
+        },
+        {
+            "content": "This is a message by user B",
+            "user": "Bobalooba",
+            "time": "10/21/2020"
+        }
+    ]
 
     useEffect(() => {
         const unsubscribe = firebase.auth().onAuthStateChanged((authState) => {
@@ -60,7 +82,24 @@ const MessageView = () => {
                             <span className="dbChannelDesc">{testChannelDescription}</span>
                         </div>
                     </div>
-                    <div className="dbMsgList"></div>
+                    <div className="dbMsgList"><ul>
+                        {testMessageList.map((message) => (
+                            <li className="dbMsgListItem">
+                                <div className="dbMessage">
+                                    <div className="dbMsgImg">
+                                        <img src={"/smile.png"}></img>
+                                    </div>
+                                    <div className="dbMsgContentWrap">
+                                        <div className="dbMsgInfo">
+                                            <span className="dbMsgName">{message.user}</span>
+                                            <span className="dbMsgTime">{message.time}</span>
+                                        </div>
+                                        <div className="dbMsgContent">{message.content}</div>
+                                    </div>
+                                </div>
+                            </li>
+                        ))}
+                    </ul></div>
                     <div className="dbSubmitMsg"></div>
                 </div>
 
@@ -72,4 +111,4 @@ const MessageView = () => {
     )
 }
 
-export default MessageView
+export default DashboardView
