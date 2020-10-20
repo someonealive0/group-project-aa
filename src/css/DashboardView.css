@@ -207,7 +207,10 @@ body {
     padding: 0;
     list-style-type: none;
     height: fit-content;
-    border: 1px solid white;
+}
+
+.dbMsgListItem:hover {
+    background-color: rgb(50, 53, 59);
 }
 
 .dbMessage {
