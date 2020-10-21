@@ -3,13 +3,16 @@
     "public": "build",
     "ignore": [
       "firebase.json",
-      "**/.*",
       "**/node_modules/**"
     ],
     "rewrites": [
       {
+        "source": "/api/**",
+        "function": "api"
+      },
+      {
         "source": "**",
-        "function": "app"
+        "destination": "/index.html"
       }
     ]
   }

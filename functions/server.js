@@ -5,16 +5,15 @@ const cors = require('cors')
 const apiRouter = require("./controllers/api.js")
 const middleware = require("./utils/middleware.js")
 
-const app = express()
+const api = express()
 
 //JSON request/response size (max)
-app.use(express.json({limit: '50mb'}))
-app.use(cors())
-app.use(express.static('../build'))
-app.use(middleware.requestLogger)
-app.use(apiRouter)
-app.use(middleware.errorMiddleware)
+api.use(express.json())
+api.use(cors())
+api.use(middleware.requestLogger)
+api.use(apiRouter)
+api.use(middleware.errorMiddleware)
 
 
-module.exports = app
+module.exports = api
 

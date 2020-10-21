@@ -1,5 +1,5 @@
 const functions = require('firebase-functions');
-const app = require('./server.js')
+const api = require('./server.js')
 
-exports.app = functions.https.onRequest(app)
+exports.api = functions.https.onRequest(api)
 
