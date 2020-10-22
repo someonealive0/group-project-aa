@@ -29,7 +29,7 @@ const Home = () => {
             <h1>Signed in as {currUser.uid}</h1> <p></p>
             <button onClick={() => testService.test().then(result => console.log(result))}>Log a test message</button>
             <button onClick={() => firebase.auth().signOut()}>Log out</button>
-            <Link to="/dashboard">Dashboard</Link>
+            <Link to="/dashboard" style={{"backgroundColor": "white"}}>Dashboard</Link>
             <br/>
             <Link to='/me'>User Profile</Link>
             
