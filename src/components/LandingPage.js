@@ -28,7 +28,6 @@ const LandingPage = () => {
             {console.log("lp user (should be null)", user)}
             <Spinner />
             <LoginForm />
-            
         </>
     )
 }

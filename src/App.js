@@ -49,7 +49,6 @@ function App() {
 
   if (user === undefined) return (<></>) //User hasn't initialised yet
   return (
-
     <Router>
       <userAuth.Provider value={user}>
         <Switch>
@@ -59,12 +58,12 @@ function App() {
           <Route exact path="/home">
             <Home />
           </Route>
-          <Route exact path="/">
-            <LandingPage />
-          </Route>
           <Route exact path="/me" render={() =>
             <UserProfile />
           }>
+          </Route>
+          <Route exact path="/">
+            <LandingPage />
           </Route>
 
         </Switch>
