@@ -5,7 +5,7 @@ import '../css/DashboardView.css'
 
 const DashboardView = () => {
     const [user, setUser] = useState(undefined)
-    const testChannelNames = ["general", "meme", "uni chat"]
+    const testChannelNames = ["general", "meme", "uni chat", "meme", "uni chat", "meme", "uni chat", "meme", "uni chat", "meme", "uni chat", "meme", "uni chat", "meme", "uni chat", "meme", "uni chat", "meme", "uni chat"]
     const testGroupName = "COMP3160 Group Project" //Should be <= 22 chars
     const testChannelDescription = "This is a description for the general channel"
     const testMessageList = [
@@ -18,6 +18,156 @@ const DashboardView = () => {
             "content": "This is a message by user D",
             "user": "Jean Tarrou",
             "time": "10/19/2020"
+        },
+        {
+            "content": "This is a message by user A",
+            "user": "someonealive",
+            "time": "10/20/2020"
+        },
+        {
+            "content": "This is a message by user B",
+            "user": "Bobalooba",
+            "time": "10/21/2020"
+        },
+        {
+            "content": "This is a message by user D",
+            "user": "Jean Tarrou",
+            "time": "10/19/2020"
+        },
+        {
+            "content": "This is a message by user A",
+            "user": "someonealive",
+            "time": "10/20/2020"
+        },
+        {
+            "content": "This is a message by user B",
+            "user": "Bobalooba",
+            "time": "10/21/2020"
+        },
+        {
+            "content": "This is a message by user D",
+            "user": "Jean Tarrou",
+            "time": "10/19/2020"
+        },
+        {
+            "content": "This is a message by user A",
+            "user": "someonealive",
+            "time": "10/20/2020"
+        },
+        {
+            "content": "This is a message by user B",
+            "user": "Bobalooba",
+            "time": "10/21/2020"
+        },
+        {
+            "content": "This is a message by user A",
+            "user": "someonealive",
+            "time": "10/20/2020"
+        },
+        {
+            "content": "This is a message by user B",
+            "user": "Bobalooba",
+            "time": "10/21/2020"
+        },
+        {
+            "content": "This is a message by user A",
+            "user": "someonealive",
+            "time": "10/20/2020"
+        },
+        {
+            "content": "This is a message by user B",
+            "user": "Bobalooba",
+            "time": "10/21/2020"
+        },
+        {
+            "content": "This is a message by user B",
+            "user": "Bobalooba",
+            "time": "10/21/2020"
+        },
+        {
+            "content": "This is a message by user A",
+            "user": "someonealive",
+            "time": "10/20/2020"
+        },
+        {
+            "content": "This is a message by user B",
+            "user": "Bobalooba",
+            "time": "10/21/2020"
+        },
+        {
+            "content": "This is a message by user A",
+            "user": "someonealive",
+            "time": "10/20/2020"
+        },
+        {
+            "content": "This is a message by user B",
+            "user": "Bobalooba",
+            "time": "10/21/2020"
+        },
+        {
+            "content": "This is a message by user B",
+            "user": "Bobalooba",
+            "time": "10/21/2020"
+        },
+        {
+            "content": "This is a message by user A",
+            "user": "someonealive",
+            "time": "10/20/2020"
+        },
+        {
+            "content": "This is a message by user B",
+            "user": "Bobalooba",
+            "time": "10/21/2020"
+        },
+        {
+            "content": "This is a message by user A",
+            "user": "someonealive",
+            "time": "10/20/2020"
+        },
+        {
+            "content": "This is a message by user B",
+            "user": "Bobalooba",
+            "time": "10/21/2020"
+        },
+        {
+            "content": "This is a message by user B",
+            "user": "Bobalooba",
+            "time": "10/21/2020"
+        },
+        {
+            "content": "This is a message by user A",
+            "user": "someonealive",
+            "time": "10/20/2020"
+        },
+        {
+            "content": "This is a message by user B",
+            "user": "Bobalooba",
+            "time": "10/21/2020"
+        },
+        {
+            "content": "This is a message by user A",
+            "user": "someonealive",
+            "time": "10/20/2020"
+        },
+        {
+            "content": "This is a message by user B",
+            "user": "Bobalooba",
+            "time": "10/21/2020"
+        },
+        {
+            "content": "This is a message by user B",
+            "user": "Bobalooba",
+            "time": "10/21/2020"
+        },
+        {
+            "content": "This is a message by user A",
+            "user": "someonealive",
+            "time": "10/20/2020"
+        },
+        {
+            "content": "This is a message by user B",
+            "user": "Bobalooba",
+            "time": "10/21/2020"
         },
         {
             "content": "This is a message by user A",
@@ -58,7 +208,7 @@ const DashboardView = () => {
                     <div className="dbColHeader">
                         <p className="dbGroupName">{testGroupName}</p>
                     </div>
-                    <ul className="dbChannelList">
+                    <div className="dbChannelList"><ul>
                         {testChannelNames.map((channel) => (
                             <li className="dbChannelListItem">
                                 <div className="dbChannel">
@@ -67,7 +217,7 @@ const DashboardView = () => {
                                 </div>
                             </li>
                         ))}
-                    </ul>
+                    </ul></div>
                     <div className="dbUserInfo">
                         <div className="dbUserImg"><img src={"/smile.png"}></img></div>
                         <span className="dbUsername">{user.uid}</span>
