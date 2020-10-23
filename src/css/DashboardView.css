@@ -42,7 +42,7 @@ body {
     padding: 0;
     background-color: rgb(47, 49, 54);
     width: 360px;
-    border-radius: 10px 0 0 0;
+    border-radius: 13px 0 0 0;
     display: flex;
     flex-flow: column nowrap;
 }
@@ -68,19 +68,30 @@ body {
 
 .dbChannelList {
     margin: 0;
+    margin-right: 3px;
     padding: 0;
-    width: 100%;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.dbChannelList::-webkit-scrollbar {
+    width: 6px;
+    border-radius: 6px;
+}
+
+.dbChannelList:hover::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+    background-color: rgb(32, 34, 37);
 }
 
 .dbChannelList ul{
     margin: 0;
+    margin-right: 3px;
     padding: 0;
-    width: 100%;
 }
 
 .dbChannelListItem {
-    margin: 3px 12px 3px 0px;
+    margin: 3px 0px 3px 0px;
     padding: 0;
     list-style-type: none;
     height: 48px;
@@ -199,8 +210,8 @@ body {
 
 .dbMsgList {
     margin: 0;
+    margin-right: 6px;
     padding: 0;
-    width: calc(100% - 6px);
     overflow-y: scroll;
     overflow-x: hidden;
     display: flex;

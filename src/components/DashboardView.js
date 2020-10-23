@@ -5,7 +5,7 @@ import '../css/DashboardView.css'
 
 const DashboardView = () => {
     const [user, setUser] = useState(undefined)
-    const testChannelNames = ["general", "meme", "uni chat", "meme", "uni chat", "meme", "uni chat", "meme", "uni chat", "meme", "uni chat", "meme", "uni chat", "meme", "uni chat", "meme", "uni chat", "meme", "uni chat"]
+    const testChannelNames = ["general", "meme", "uni chat","meme", "uni chat","meme", "uni chat","meme", "uni chat", "meme", "uni chat", "meme", "uni chat", "meme", "uni chat", "meme", "uni chat", "meme", "uni chat", "meme", "uni chat", "meme", "uni chat", "meme", "uni chat"]
     const testGroupName = "COMP3160 Group Project" //Should be <= 22 chars
     const testChannelDescription = "This is a description for the general channel"
     const testMessageList = [
