@@ -4,7 +4,7 @@ const path = require('path')
 
 const apiRouter = express.Router()
 
-apiRouter.get('/test/test_msg', function(req, res) {
+apiRouter.get('/api/test/*', function(req, res) {
 
   res.status(200).json({"message": "This is a test message from the API.", "rq": req.url})
 })
