@@ -5,42 +5,9 @@ import '../css/DashboardView.css'
 
 const DashboardView = () => {
     const [user, setUser] = useState(undefined)
-    const testChannelNames = ["generalssss ss", "meme", "uni chat", "meme", "uni chat", "meme", "uni chat", "meme", "uni chat", "meme", "uni chat", "meme", "uni chat", "meme", "uni chat", "meme", "uni chat"]
-    const testUsers = ["userA", "userB", "userC", "userA", "userB", "userC", "userA", "userB", "userC", "userA", "userB", "userC", "userA", "userB", "userC", "userA", "userB", "userC", "userA", "userB", "userC", "userA", "userB", "userC"]
-    const testGroupName = "COMP3160 Group Project" //Should be <= 22 chars
-    const testChannelDescription = "This is a description for the general channel"
-    const testMessageList = [
-        {
-            "content": "This is a message by user C",
-            "user": "Mandible",
-            "time": "10/18/2020"
-        },
-        {
-            "content": "This is a message by user D",
-            "user": "Jean Tarrou",
-            "time": "10/19/2020"
-        },
-        {
-            "content": "This is a message by user A",
-            "user": "someonealive",
-            "time": "10/20/2020"
-        },
-        {
-            "content": "This is a message by user B",
-            "user": "Bobalooba",
-            "time": "10/21/2020"
-        },
-        {
-            "content": "This is a message by user D",
-            "user": "Jean Tarrou",
-            "time": "10/19/2020"
-        },
-        {
-            "content": "This is a message by user A",
-            "user": "someonealive",
-            "time": "10/20/2020"
-        }
-    ]
+    const [groupData, setGroupData] = useState(undefined)
+    const [messageList, setMessageList] = useState([])
+    const [currentChannel, setCurrentChannel] = useState(undefined)  
 
     useEffect(() => {
         const unsubscribe = firebase.auth().onAuthStateChanged((authState) => {
@@ -52,13 +19,29 @@ const DashboardView = () => {
                 setUser(null)
             }
         })
-        return () => unsubscribe()
+
+        const messagesRef = firebase.database().ref('messages').child('channelid1')
+        messagesRef.on('value', (snapshot) => {
+            let messages = []
+            if (!snapshot.exists()) {return}
+            snapshot.forEach((snap) => {
+                messages.push(snap.val())
+            })
+            setMessageList(messageList.concat(messages))
+        })
+
+        const groupRef = firebase.database().ref('groupData').child('someid123')
+        groupRef.on('value', (snapshot) => {
+            const groupData = snapshot.val()
+            setCurrentChannel({"channelID": "channelid1", "channelData": groupData.channels["channelid1"]})
+            setGroupData(groupData)
+        })
+
+        return () => {unsubscribe(); messagesRef.off(); groupRef.off()}
     }, [])
 
     if (user === null) return (<Redirect to="/" />) //Redirect to landing page if user logged out
-
     if (user === undefined) return (<></>) //User hasn't initialised yet
-
     return (
         <div className="dbWrapper">
             <div className="dbHeader">Discord (sort of)</div>
@@ -67,17 +50,17 @@ const DashboardView = () => {
 
                 <div className="dbChannelCol">
                     <div className="dbColHeader">
-                        <p className="dbGroupName">{testGroupName}</p>
+                        <p className="dbGroupName">{groupData ? groupData.groupname : <></>}</p>
                     </div>
                     <div className="dbChannelList"><ul>
-                        {testChannelNames.map((channel) => (
-                            <li className="dbChannelListItem">
+                        {groupData ? Object.entries(groupData.channels).map(([channelID, channel], index) => (
+                            <li key={index} className="dbChannelListItem">
                                 <div className="dbChannel">
                                     <span className="dbChannelIcon">#</span>
-                                    <span className="dbChannelName">{channel}</span>
+                                    <span className="dbChannelName">{channel.name}</span>
                                 </div>
                             </li>
-                        ))}
+                        )) : <></>}
                     </ul></div>
                     <div className="dbUserInfo">
                         <div className="dbUserImg"><img src={"/smile.png"}></img></div>
@@ -89,13 +72,13 @@ const DashboardView = () => {
                     <div className="dbColHeader">
                         <div className="dbCurrentChannel">
                             <span className="dbChannelIcon">#</span>
-                            <span className="dbChannelName">{testChannelNames[0]}</span>
-                            <span className="dbChannelDesc">{testChannelDescription}</span>
+                            <span className="dbChannelName">{currentChannel ? currentChannel.channelData.name : <></>}</span>
+                            <span className="dbChannelDesc">{currentChannel ? currentChannel.channelData.description : <></>}</span>
                         </div>
                     </div>
                     <div className="dbMsgList"><ul>
-                        {testMessageList.map((message) => (
-                            <li className="dbMsgListItem">
+                        {messageList.map((message, index) => (
+                            <li key={index} className="dbMsgListItem">
                                 <div className="dbMessage">
                                     <div className="dbMsgImg">
                                         <img src={"/smile.png"}></img>
@@ -117,14 +100,14 @@ const DashboardView = () => {
                 <div className="dbUsersCol">
                     <div className="dbColHeader"></div>
                     <div className="dbUserList"><ul>
-                        {testUsers.map((user) => (
-                            <li className="dbUserListItem">
+                        {groupData ? Object.entries(groupData.members).map(([user, exists], index) => (
+                            <li key={index} className="dbUserListItem">
                                 <div className="dbUser">
                                     <div className="dbUserImg"><img src={"/smile.png"}></img></div>
                                     <span className="dbUserName">{user}</span>
                                 </div>
                             </li>
-                        ))}
+                        )) : <></>}
                     </ul></div>
                 </div>
             </div>
