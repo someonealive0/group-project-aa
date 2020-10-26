@@ -25,7 +25,7 @@
     "react-string-replace": "^0.4.4"
   },
   "scripts": {
-    "start": "set NODE_ENV=dev&& react-scripts start",
+    "start": "set NODE_ENV=dev&& set PORT=3000&& react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

@@ -14,10 +14,10 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 const Register = () => {
   const [open, setOpen] = useState(false)
 
+  const regexUsername = /(\w+)/g
   const initialState = { username: '', password: '', email: '' }
   const [signupDetails, setSignupDetails] = useState(initialState)
   const [passwordRepeat, setPasswordRepeat] = useState('')
-  const regexUsername = /(\w+)/g
 
   const handleClickOpen = (event) => {
     event.preventDefault()
@@ -60,17 +60,24 @@ const Register = () => {
       return
     }
 
-    console.log("checkign username")
     //Check if username is free, then create user and store them in firebase
-    const dbRef = firebase.database().ref('users').child(username.toLowerCase())
-    dbRef.once('value', (snapshot) => {
+    const usernameLC = username.toLowerCase()
+    const dbUsersRef = firebase.database().ref('users')
+    const dbUserDataRef = firebase.database().ref('userData')
+    
+    dbUsersRef.child(usernameLC).once('value', (snapshot) => {
       if (!snapshot.exists()) {
         firebase.auth().createUserWithEmailAndPassword(email, password).then((result) => {
-          dbRef.set({
-            uid: result.user.uid,
-            username: username,
-            email: email,
-          })
+          dbUserDataRef.child(result.user.uid).set({
+            "username": username,
+            "email": email,
+            "profileImg": "https://robohash.org/" + username,
+            "groups": []
+          }).catch((error) => console.log(error))
+
+          var dbUserObj = {}
+          dbUserObj[usernameLC] = true
+          dbUsersRef.update(dbUserObj)
 
           setSignupDetails(initialState)
           setPasswordRepeat('')
