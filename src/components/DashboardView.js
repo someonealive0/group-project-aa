@@ -7,7 +7,8 @@ const DashboardView = () => {
     const [user, setUser] = useState(undefined)
     const [groupData, setGroupData] = useState(undefined)
     const [messageList, setMessageList] = useState([])
-    const [currentChannel, setCurrentChannel] = useState(undefined)  
+    const [currentChannel, setCurrentChannel] = useState(undefined)
+    const [userData, setUserData] = useState(undefined)  
 
     useEffect(() => {
         const unsubscribe = firebase.auth().onAuthStateChanged((authState) => {
@@ -46,7 +47,7 @@ const DashboardView = () => {
         <div className="dbWrapper">
             <div className="dbHeader">Discord (sort of)</div>
             <div className="dbMainContent">
-                <div className="dbGroupIconList"></div>
+                <div className="dbGroupCol"></div>
 
                 <div className="dbChannelCol">
                     <div className="dbColHeader">
