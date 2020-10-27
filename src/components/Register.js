@@ -76,7 +76,7 @@ const Register = () => {
           }).catch((error) => console.log(error))
 
           var dbUserObj = {}
-          dbUserObj[usernameLC] = true
+          dbUserObj[usernameLC] = result.user.uid
           dbUsersRef.update(dbUserObj)
 
           setSignupDetails(initialState)
