@@ -9,6 +9,7 @@ const DashboardView = () => {
     const [messageList, setMessageList] = useState([])
     const [currentChannel, setCurrentChannel] = useState(undefined)
     const [userData, setUserData] = useState({})
+    const [messageInput, setMessageInput] = useState("")
 
     useEffect(() => {
         let unsubscribe = () => { }
@@ -69,6 +70,13 @@ const DashboardView = () => {
         })
     }
 
+    const handleMessageSubmit = (event) => {
+        event.preventDefault()
+        const message = {"content": messageInput, "time": "22/10/2020", "user": user.uid}
+        firebase.database().ref("messages").child("channelid1").push(message)
+        setMessageInput("")
+    }
+
     if (user === null) return (<Redirect to="/" />) //Redirect to landing page if user logged out
     if (user === undefined) return (<></>) //User hasn't initialised yet
     return (
@@ -93,7 +101,6 @@ const DashboardView = () => {
                     </ul></div>
                     <div className="dbUserInfo">
                         <div className="dbUserImg"><img src={userData[user.uid] ? userData[user.uid].profileImg : "/smile.png"}></img></div>
-                        {console.log(userData)}
                         <span className="dbUsername">{userData[user.uid] ? userData[user.uid].username : "username"}</span>
                     </div>
                 </div>
@@ -126,7 +133,9 @@ const DashboardView = () => {
                     </ul></div>
                     <div className="dbSubmitMsg">
                         <div className="dbSubmitMedia"><div className="dbSubmitMediaIcon">+</div></div>
-                        <form className="dbSubmitForm"><input type="text" placeholder="Message this channel"></input></form>
+                        <form className="dbSubmitForm" onSubmit={handleMessageSubmit}>
+                            <input type="text" placeholder="Message this channel" value={messageInput} onChange={((event) => setMessageInput(event.target.value))}></input>
+                        </form>
                     </div>
                 </div>
 
