@@ -1,6 +1,26 @@
 @font-face {
     font-family: whitney;
+    src: url("/whitney-light.otf") format("opentype");
+    font-style: normal;
+    font-weight: 300;
+}
+@font-face {
+    font-family: whitney;
+    src: url("/whitney-book.otf") format("opentype");
+    font-style: normal;
+    font-weight: 400;
+}
+@font-face {
+    font-family: whitney;
     src: url("/whitney-medium.otf") format("opentype");
+    font-style: normal;
+    font-weight: 500;
+}
+@font-face {
+    font-family: whitney;
+    src: url("/whitney-semibold.otf") format("opentype");
+    font-style: normal;
+    font-weight: 700;
 }
 
 body {
@@ -8,6 +28,8 @@ body {
     padding: 0;
     height: 100%;
     font-family: whitney;
+    font-style: normal;
+    font-weight: normal;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background-image: radial-gradient(#7289da, rgb(54, 57, 63));

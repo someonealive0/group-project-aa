@@ -101,8 +101,8 @@ const DashboardView = () => {
                 <div className="dbMessagesCol">
                     <div className="dbColHeader">
                         <div className="dbCurrentChannel">
-                            <span className="dbChannelIcon">#</span>
-                            <span className="dbChannelName">{currentChannel ? currentChannel.channelData.name : <></>}</span>
+                            <span className="dbCurrentChannelIcon">#</span>
+                            <span className="dbCurrentChannelName">{currentChannel ? currentChannel.channelData.name : <></>}</span>
                             <span className="dbChannelDesc">{currentChannel ? currentChannel.channelData.description : <></>}</span>
                         </div>
                     </div>
@@ -124,7 +124,10 @@ const DashboardView = () => {
                             </li>
                         ))}
                     </ul></div>
-                    <div className="dbSubmitMsg"></div>
+                    <div className="dbSubmitMsg">
+                        <div className="dbSubmitMedia"><div className="dbSubmitMediaIcon">+</div></div>
+                        <form className="dbSubmitForm"><input type="text" placeholder="Message this channel"></input></form>
+                    </div>
                 </div>
 
                 <div className="dbUsersCol">
@@ -134,7 +137,7 @@ const DashboardView = () => {
                             <li key={index} className="dbUserListItem">
                                 <div className="dbUser">
                                     <div className="dbUserImg"><img src={userData[groupUserID] ? userData[groupUserID].profileImg : "/smile.png"}></img></div>
-                                    <span className="dbUserName">{groupUsername}</span>
+                                    <span className="dbUserListName">{groupUsername}</span>
                                 </div>
                             </li>
                         )) : <></>}

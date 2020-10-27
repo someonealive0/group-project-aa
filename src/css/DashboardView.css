@@ -67,7 +67,7 @@ body {
     margin: 20px 0 25px 25px;
     padding: 0;
     font-size: 1.5rem;
-    font-weight: 500;
+    font-weight: 700;
 }
 
 .dbChannelList {
@@ -123,7 +123,7 @@ body {
     padding: 0;
     width: 51px;
     font-size: 2rem;
-    font-weight: 500;
+    font-weight: 700;
     text-align: center;
 }
 
@@ -131,7 +131,7 @@ body {
     margin: 0;
     padding: 0;
     flex-grow: 1;
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     font-weight: 500;
 }
 
@@ -177,7 +177,8 @@ body {
 .dbUsername {
     margin: 0;
     padding: 0;
-    font-weight: 500;
+    font-size: 1.25rem;
+    font-weight: 700;
 }
 
 .dbMessagesCol {
@@ -198,15 +199,24 @@ body {
     font-weight: 500;
 }
 
-.dbCurrentChannel .dbChannelIcon {
+.dbCurrentChannelIcon {
     margin-left: 20px;
     margin-right: 10px;
+    padding: 0;
+    width: 51px;
     color: rgb(114, 118, 125);
     font-size: 2.75rem;
+    font-weight: 500;
+    text-align: center;
 }
 
-.dbChannelName {
-    white-space:nowrap;
+.dbCurrentChannelName {
+    margin: 0;
+    padding: 0;
+    flex-grow: 1;
+    font-size: 1.5rem;
+    font-weight: 500;
+    white-space: nowrap;
 }
 
 .dbChannelDesc {
@@ -216,7 +226,8 @@ body {
     width: 100%;
     height: auto;
     text-align: center;
-    font-size: 1.2rem;
+    font-size: 1.25rem;
+    font-weight: 500;
     border-left: 2px solid rgb(66, 69, 74);
     color: rgb(185, 185, 190);
     white-space:nowrap;
@@ -314,8 +325,8 @@ body {
     margin: 0;
     margin-top: auto;
     padding: 0;
-    font-size: 1.4rem;
-    font-weight: 400;
+    font-size: 1.5rem;
+    font-weight: 500;
 }
 
 .dbMsgTime {
@@ -324,7 +335,7 @@ body {
     margin-left: 15px;
     padding: 0;
     font-size: 1.1rem;
-    font-weight: 500;
+    font-weight: 400;
     color: rgb(114, 118, 125);
     line-height: 1.7rem;
 }
@@ -335,7 +346,7 @@ body {
     padding: 0;
     width: 100%;
     flex-grow: 1;
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     font-weight: 400;
     color: rgb(220, 221, 222);
 }
@@ -348,6 +359,59 @@ body {
     background-color: rgb(64, 68, 75);
     border-radius: 8px;
     flex-shrink: 0;
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.dbSubmitMedia {
+    width: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.dbSubmitMediaIcon {
+    margin: 0;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    background-color: rgb(185, 187, 190);
+    color: rgb(64, 68, 75);
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.dbSubmitMediaIcon:hover {
+    background-color: rgb(220, 221, 222);
+}
+
+.dbSubmitForm {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+}
+
+.dbSubmitForm input {
+    background-color: transparent;
+    border: none;
+    font-family: whitney;
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: rgb(220, 221, 222);
+    width: 98%;
+}
+
+.dbSubmitForm input::placeholder {
+    color: rgb(114, 118, 125);
+}
+
+.dbSubmitForm input:focus {
+    border: none;
+    outline: none;
 }
 
 .dbUsersCol {
@@ -416,7 +480,7 @@ body {
 .dbUser .dbUserImg {
     margin: 0;
     padding: 0;
-    width: 72px;
+    width: 78px;
     height: 100%;
     display: flex;
     flex-flow: row nowrap;
@@ -430,10 +494,11 @@ body {
     height: 48px;
 }
 
-.dbUserName {
+.dbUserListName {
     margin: 0;
     padding: 0;
     flex-grow: 1;
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     font-weight: 500;
+    color: rgb(142, 146, 151);
 }
