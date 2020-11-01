@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom"
 import * as firebase from 'firebase'
 import '../css/DashboardView.css'
@@ -10,6 +10,9 @@ const DashboardView = () => {
     const [currentChannel, setCurrentChannel] = useState(undefined)
     const [userData, setUserData] = useState({})
     const [messageInput, setMessageInput] = useState("")
+    const messagesEndRef = useRef()
+    const msgListRef = useRef()
+    const [shouldScroll, setShouldScroll] = useState(false)
 
     useEffect(() => {
         let unsubscribe = () => { }
@@ -41,6 +44,8 @@ const DashboardView = () => {
                     snapshot.forEach((snap) => {
                         messages.push(snap.val())
                     })
+                    setShouldScroll(msgListRef.current.scrollHeight - msgListRef.current.scrollTop === msgListRef.current.clientHeight)
+                    if (messagesEndRef.current && msgListRef.current) console.log(msgListRef.current.scrollHeight - msgListRef.current.scrollTop, msgListRef.current.clientHeight)
                     setMessageList(messageList.concat(messages))
                 })
 
@@ -64,6 +69,10 @@ const DashboardView = () => {
         return () => { unsubscribe(); messagesRef.off(); groupRef.off() }
     }, [user])
 
+    useEffect(() => {
+        if (shouldScroll) {messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });console.log("scrolling"); setShouldScroll(false)}
+    }, [messageList])
+
     const getUserDetails = (uid) => {
         return firebase.database().ref("userData").child(uid).once("value").then((details) => {
             return details.val()
@@ -72,7 +81,7 @@ const DashboardView = () => {
 
     const handleMessageSubmit = (event) => {
         event.preventDefault()
-        const message = {"content": messageInput, "time": "22/10/2020", "user": user.uid}
+        const message = { "content": messageInput, "time": "22/10/2020", "user": user.uid }
         firebase.database().ref("messages").child("channelid1").push(message)
         setMessageInput("")
     }
@@ -113,7 +122,7 @@ const DashboardView = () => {
                             <span className="dbChannelDesc">{currentChannel ? currentChannel.channelData.description : <></>}</span>
                         </div>
                     </div>
-                    <div className="dbMsgList"><ul>
+                    <div className="dbMsgList" ref={msgListRef}><ul>
                         {messageList.map((message, index) => (
                             <li key={index} className="dbMsgListItem">
                                 <div className="dbMessage">
@@ -130,7 +139,7 @@ const DashboardView = () => {
                                 </div>
                             </li>
                         ))}
-                    </ul></div>
+                    </ul><div ref={messagesEndRef}/></div>
                     <div className="dbSubmitMsg">
                         <div className="dbSubmitMedia"><div className="dbSubmitMediaIcon">+</div></div>
                         <form className="dbSubmitForm" onSubmit={handleMessageSubmit}>
