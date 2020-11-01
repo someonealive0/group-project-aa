@@ -70,7 +70,7 @@ const DashboardView = () => {
     }, [user])
 
     useEffect(() => {
-        if (shouldScroll) {messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });console.log("scrolling"); setShouldScroll(false)}
+        if (shouldScroll) {messagesEndRef.current.scrollIntoView();console.log("scrolling"); setShouldScroll(false)}
     }, [messageList])
 
     const getUserDetails = (uid) => {
