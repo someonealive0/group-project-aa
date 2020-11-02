@@ -62,8 +62,6 @@ const DBMessagesCol = ({ user, currentChannel, userData }) => {
         setMessageInput("")
     }
 
-    if (user === null) return (<Redirect to="/" />) //Redirect to landing page if user logged out
-    if (user === undefined) return (<></>) //User hasn't initialised yet
     return (
         <div className="dbMessagesCol">
             <div className="dbColHeader">

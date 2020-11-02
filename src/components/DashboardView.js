@@ -3,7 +3,9 @@ import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-ro
 import * as firebase from 'firebase'
 import '../css/DashboardView.css'
 
+import dbChannelCol from './dbChannelCol'
 import DBMessagesCol from './dbMessagesCol'
+import DBChannelCol from './dbChannelCol'
 
 const DashboardView = () => {
     const [user, setUser] = useState(undefined)
@@ -67,27 +69,11 @@ const DashboardView = () => {
             <div className="dbHeader">Discord (sort of)</div>
             <div className="dbMainContent">
                 <div className="dbGroupCol"></div>
-
-                <div className="dbChannelCol">
-                    <div className="dbColHeader">
-                        <p className="dbGroupName">{groupData ? groupData.groupname : <></>}</p>
-                    </div>
-                    <div className="dbChannelList"><ul>
-                        {groupData ? Object.entries(groupData.channels).map(([channelID, channel], index) => (
-                            <li key={index} className="dbChannelListItem">
-                                <div className="dbChannel">
-                                    <span className="dbChannelIcon">#</span>
-                                    <span className="dbChannelName">{channel.name}</span>
-                                </div>
-                            </li>
-                        )) : <></>}
-                    </ul></div>
-                    <div className="dbUserInfo">
-                        <div className="dbUserImg"><img src={userData[user.uid] ? userData[user.uid].profileImg : "/smile.png"}></img></div>
-                        <span className="dbUsername">{userData[user.uid] ? userData[user.uid].username : "username"}</span>
-                    </div>
-                </div>
-
+                {console.log(groupData)}
+                
+                <DBChannelCol authUserData={userData[user.uid]} currentChannel={currentChannel} setCurrentChannel={setCurrentChannel} 
+                    groupName={groupData ? groupData.groupName : ""} channels={groupData ? groupData.channels : null}/>
+               
                 <DBMessagesCol user={user} currentChannel={currentChannel} userData={userData} />
 
                 <div className="dbUsersCol">
