@@ -2,7 +2,12 @@ import React, { useState, useEffect, useRef, useLayoutEffect } from 'react'
 import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom"
 import * as firebase from 'firebase'
 import '../css/DashboardView.css'
-import Timestamp from 'react-timestamp'
+
+//Timestamps
+import TimeAgo from 'javascript-time-ago'
+import en from 'javascript-time-ago/locale/en' 
+import ReactTimeAgo from 'react-time-ago'
+TimeAgo.addDefaultLocale(en)
 
 const DBMessagesCol = ({ user, currentChannel, userData }) => {
     const [messageList, setMessageList] = useState([])
@@ -83,7 +88,7 @@ const DBMessagesCol = ({ user, currentChannel, userData }) => {
                                         <span className="dbMsgName">{userData[msgDetails.user] ? userData[msgDetails.user].username : msgDetails.user}</span>
                                         {msgDetails.time < Date.now() - 24 * 60 * 60 * 1000 ? //Use relative time for messages < 24 hrs old, otherwise formatted time
                                             <span className="dbMsgTime">{date}</span> :
-                                            <Timestamp relative autoUpdate className="dbMsgTime" date={new Date(msgDetails.time)} />
+                                            <ReactTimeAgo className="dbMsgTime" date={new Date(msgDetails.time)} locale="en-US" timeStyle="round-minute"/>
                                         }
                                     </div>
                                     <div className="dbMsgContent">{msgDetails.content}</div>
