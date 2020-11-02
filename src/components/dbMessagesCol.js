@@ -15,9 +15,11 @@ const DBMessagesCol = ({ user, currentChannel, userData }) => {
         let cleanUpSubscriptions = () => { }
 
         if (user && currentChannel) {
+            //Get ref to RTDB for current channel
             const messagesRef = firebase.database().ref('messages').child(currentChannel.channelID)
             cleanUpSubscriptions = () => { messagesRef.off() }
 
+            //Configure child update events to update message list
             messagesRef.on('child_added', (snapshot) => {
                 setShouldScroll(msgListRef.current.scrollHeight - msgListRef.current.scrollTop === msgListRef.current.clientHeight)
                 setMessageList((prev) => [...prev, { "msgID": snapshot.key, "msgDetails": snapshot.val() }])
@@ -40,6 +42,7 @@ const DBMessagesCol = ({ user, currentChannel, userData }) => {
         return cleanUpSubscriptions
     }, [user, currentChannel])
 
+    //Scroll page down when new messages added and user is at bottom of message list
     useLayoutEffect(() => {
         if (shouldScroll) {
             messagesEndRef.current.scrollIntoView()
@@ -68,7 +71,7 @@ const DBMessagesCol = ({ user, currentChannel, userData }) => {
             <div className="dbMsgList" ref={msgListRef}><ul>
                 {messageList.map(({ msgID, msgDetails }, index) => {
                     let date = new Date(msgDetails.time)
-                    date = date.getDate() + "/" + (date.getMonth()+1) + "/" + date.getFullYear()
+                    date = date.getDate() + "/" + (date.getMonth()+1) + "/" + date.getFullYear() //Formatted time as DD/MM/YYYY
                     return (
                         <li key={index} className="dbMsgListItem">
                             <div className="dbMessage">
@@ -78,7 +81,7 @@ const DBMessagesCol = ({ user, currentChannel, userData }) => {
                                 <div className="dbMsgContentWrap">
                                     <div className="dbMsgInfo">
                                         <span className="dbMsgName">{userData[msgDetails.user] ? userData[msgDetails.user].username : msgDetails.user}</span>
-                                        {msgDetails.time < Date.now() - 24 * 60 * 60 * 1000 ?
+                                        {msgDetails.time < Date.now() - 24 * 60 * 60 * 1000 ? //Use relative time for messages < 24 hrs old, otherwise formatted time
                                             <span className="dbMsgTime">{date}</span> :
                                             <Timestamp relative autoUpdate className="dbMsgTime" date={new Date(msgDetails.time)} />
                                         }
