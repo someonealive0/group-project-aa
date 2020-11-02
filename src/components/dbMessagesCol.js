@@ -2,8 +2,9 @@ import React, { useState, useEffect, useRef, useLayoutEffect } from 'react'
 import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom"
 import * as firebase from 'firebase'
 import '../css/DashboardView.css'
+import Timestamp from 'react-timestamp'
 
-const DashboardView = ({ user, currentChannel, userData }) => {
+const DBMessagesCol = ({ user, currentChannel, userData }) => {
     const [messageList, setMessageList] = useState([])
     const [messageInput, setMessageInput] = useState("")
     const [shouldScroll, setShouldScroll] = useState(false)
@@ -67,7 +68,7 @@ const DashboardView = ({ user, currentChannel, userData }) => {
                             <div className="dbMsgContentWrap">
                                 <div className="dbMsgInfo">
                                     <span className="dbMsgName">{userData[msgDetails.user] ? userData[msgDetails.user].username : msgDetails.user}</span>
-                                    <span className="dbMsgTime">{msgDetails.time}</span>
+                                    <Timestamp relative autoUpdate className="dbMsgTime" date={msgDetails.time.toString().slice(0,-3)}/>
                                 </div>
                                 <div className="dbMsgContent">{msgDetails.content}</div>
                             </div>
@@ -85,4 +86,4 @@ const DashboardView = ({ user, currentChannel, userData }) => {
     )
 }
 
-export default DashboardView
+export default DBMessagesCol
