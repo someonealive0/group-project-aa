@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-ro
 import * as firebase from 'firebase'
 import '../css/DashboardView.css'
 
-const DBChannelCol = ({currentChannel, setCurrentChannel, groupName, channels, authUserData}) => {
+const DBChannelCol = ({ currentChannel, setCurrentChannel, groupName, channels, authUserData }) => {
 
     return (
         <div className="dbChannelCol">
@@ -13,9 +13,11 @@ const DBChannelCol = ({currentChannel, setCurrentChannel, groupName, channels, a
             <div className="dbChannelList"><ul>
                 {channels ? Object.entries(channels).map(([channelID, channel], index) => (
                     <li key={index} className="dbChannelListItem">
-                        <div className="dbChannel">
+                        <div className="dbChannel" onClick={() => setCurrentChannel(channelID)}>
                             <span className="dbChannelIcon">#</span>
-                            <span className="dbChannelName">{channel.name}</span>
+                            <span className="dbChannelName">
+                                {currentChannel && currentChannel.channelID == channelID ? channel.name + "*" : channel.name}
+                            </span>
                         </div>
                     </li>
                 )) : <></>}
