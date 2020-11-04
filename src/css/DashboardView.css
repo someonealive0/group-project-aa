@@ -101,7 +101,7 @@ body {
     height: 48px;
 }
 
-.dbChannel {
+.dbChannel, .dbSelectedChannel {
     margin: 0;
     margin-left: 12px;
     padding: 0;
@@ -113,6 +113,11 @@ body {
     align-items: center;
     color: rgb(114, 118, 125);
 }
+
+.dbSelectedChannel {
+    background-color: rgb(57, 60, 67);
+}
+
 
 .dbChannelListItem:hover .dbChannel{
     background-color: rgb(52, 55, 60);
@@ -135,8 +140,12 @@ body {
     font-weight: 500;
 }
 
+.dbSelectedChannel .dbChannelName {
+    color: white;
+}
+
 .dbChannel:hover .dbChannelName {
-    color:white;
+    color:rgb(220, 221, 222);
 }
 
 .dbUserInfo {

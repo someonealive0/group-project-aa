@@ -13,10 +13,12 @@ const DBChannelCol = ({ currentChannel, setCurrentChannel, groupName, channels, 
             <div className="dbChannelList"><ul>
                 {channels ? Object.entries(channels).map(([channelID, channel], index) => (
                     <li key={index} className="dbChannelListItem">
-                        <div className="dbChannel" onClick={() => setCurrentChannel(channelID)}>
+                        <div onClick={() => setCurrentChannel(channelID)} 
+                            className={currentChannel && currentChannel.channelID == channelID ? "dbSelectedChannel" : "dbChannel"}>
+
                             <span className="dbChannelIcon">#</span>
                             <span className="dbChannelName">
-                                {currentChannel && currentChannel.channelID == channelID ? channel.name + "*" : channel.name}
+                                {channel.name}
                             </span>
                         </div>
                     </li>
