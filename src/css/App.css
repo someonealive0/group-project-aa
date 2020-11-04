@@ -4,18 +4,21 @@
     font-style: normal;
     font-weight: 300;
 }
+
 @font-face {
     font-family: whitney;
     src: url("/whitney-book.otf") format("opentype");
     font-style: normal;
     font-weight: 400;
 }
+
 @font-face {
     font-family: whitney;
     src: url("/whitney-medium.otf") format("opentype");
     font-style: normal;
     font-weight: 500;
 }
+
 @font-face {
     font-family: whitney;
     src: url("/whitney-semibold.otf") format("opentype");
@@ -91,4 +94,36 @@ body {
         opacity: 0;
         display: none;
     }
+}
+
+.user-profile-card {
+    min-width: 275;
+    max-width: 400;
+    margin: 15% 25%;
+}
+
+.user-card-content {
+    text-align: center;
+    align-items: center;
+}
+
+.user-profile-pic-holder {
+    text-align: center;
+    margin: auto auto;
+    width: 25%;
+    height: 25%;
+    border: 1px solid gray;
+    border-radius: 60%;
+    /* background-color: red; */
+}
+
+.user-profile-pic {
+    margin: auto auto;
+    width: 45%;
+    height: auto;
+}
+
+.btn-container {
+    justify-content: center;
+    text-align: center;
 }
