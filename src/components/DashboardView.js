@@ -8,15 +8,18 @@ import DBChannelCol from './dbChannelCol'
 
 const DashboardView = () => {
     const [user, setUser] = useState(undefined)
-    const [groupData, setGroupData] = useState(undefined)
+    const [groupData, setGroupData] = useState({ "empty": true })
     const [currentChannel, setCurrentChannel] = useState(undefined)
+    const [currentGroup, setCurrentGroup] = useState(undefined)
     const [userData, setUserData] = useState({})
+
+    var unsubscribe = () => { }
+    const groupRef = firebase.database().ref('groupData')
 
     useEffect(() => {
         //Set up user auth listener
-        let unsubscribe = () => { }
         if (user === undefined) {
-            unsubscribe = firebase.auth().onAuthStateChanged(async (authState) => {
+            unsubscribe = firebase.auth().onAuthStateChanged((authState) => {
                 if (authState) {
                     console.log("Signed in as", authState)
                     setUser(authState)
@@ -27,42 +30,34 @@ const DashboardView = () => {
             })
         }
 
-        const groupRef = firebase.database().ref('groupData').child('someid123')
-
-        const initialise = async () => {
-            if (user) {
-                //Add authenticated user to userData lookup
-                let userDetails = {}
-                userDetails[user.uid] = await getUserDetails(user.uid)
-
-                //Set groupdata for current group
-                groupRef.on('value', (snapshot) => {
-                    const groupData = snapshot.val()
-                    setCurrentChannel({ "channelID": "channelid1", "channelData": groupData.channels["channelid1"] })
-                    setGroupData(groupData)
-
-                    //Populate userData lookup with group members' details
-                    Promise.all(Object.entries(groupData.members).map(async ([uid, exists]) => {
-                        userDetails[uid] = await getUserDetails(uid)
-                    })).then(() => setUserData((prev) => ({ ...prev, ...userDetails })))
-
+        if (user && !userData[user.uid]) {
+            firebase.database().ref("userData").child(user.uid).once("value").then((snapshot) => {
+                setUserData((prev) => {
+                    const newUserData = { ...prev }
+                    newUserData[user.uid] = snapshot.val()
+                    return newUserData
                 })
-            }
+            })
         }
 
-        initialise()
+        if (groupData.empty) {
+            firebase.database().ref('groupData').on("value", (snapshot) => { setGroupData(snapshot.val()) })
+        }
 
         return () => { unsubscribe(); groupRef.off() }
     }, [user])
 
-    const getUserDetails = (uid) => {
-        return firebase.database().ref("userData").child(uid).once("value").then((details) => {
-            return details.val()
-        })
-    }
+    useEffect(() => {
+        if (currentGroup) {
+            const mainChannel = groupData[currentGroup.id].channels
+            const [channelID, channelData] = Object.entries(mainChannel)[0]
+            setCurrentChannel({"channelID": channelID, "channelData": channelData})
+        }
+    }, [currentGroup])
+
 
     const setCurrentChannelFn = (channelID) => {
-        setCurrentChannel({ "channelID": channelID, "channelData": groupData.channels[channelID] })
+        setCurrentChannel({ "channelID": channelID, "channelData": groupData[currentGroup.id].channels[channelID] })
     }
 
     if (user === null) return (<Redirect to="/" />) //Redirect to landing page if user logged out
@@ -76,36 +71,28 @@ const DashboardView = () => {
                         <img className="dbGroupHomeImg" src="/logo.png"></img>
                     </div>
                     <div className="dbGroupList"><ul>
-                        <li><div className="dbGroup dbGroupCurrent">
-                            <img className="dbGroupImg" src="/logo.png"></img>
-                        </div></li>
-
-                        <li><div className="dbGroup">
-                            <img className="dbGroupImg" src="/logo.png"></img>
-                        </div></li>
-                        <li><div className="dbGroup">
-                            <img className="dbGroupImg" src="/logo.png"></img>
-                        </div></li>
-                        <li><div className="dbGroup">
-                            <img className="dbGroupImg" src="/logo.png"></img>
-                        </div></li>
+                        {Object.entries(groupData).map(([groupID, groupDetails], index) => (
+                            <li key={index}><div className={currentGroup && currentGroup.id == groupID ? "dbGroup dbGroupCurrent" : "dbGroup"} onClick={() => setCurrentGroup({"id": groupID})}>
+                                {console.log(groupDetails)}
+                                <img className="dbGroupImg" src={groupDetails.groupImg}></img>
+                            </div></li>
+                        ))}
                     </ul></div>
                 </div>
 
                 <DBChannelCol authUserData={userData[user.uid]} currentChannel={currentChannel} setCurrentChannel={setCurrentChannelFn}
-                    groupName={groupData ? groupData.groupName : ""} channels={groupData ? groupData.channels : null} />
+                    groupName={currentGroup && groupData[currentGroup.id] ? groupData[currentGroup.id].groupName : ""} channels={currentGroup && groupData[currentGroup.id] ? groupData[currentGroup.id].channels : null} />
 
                 <DBMessagesCol user={user} currentChannel={currentChannel} userData={userData} />
 
                 <div className="dbUsersCol">
                     <div className="dbColHeader"></div>
                     <div className="dbUserList"><ul>
-                        {console.log(groupData)}
-                        {groupData && userData ? Object.entries(groupData.members).map(([groupUserID, groupUsername], index) => (
+                        {currentGroup && groupData[currentGroup.id] ? Object.entries(groupData[currentGroup.id].members).map(([groupUserID, exists], index) => (
                             <li key={index} className="dbUserListItem">
                                 <div className="dbUser">
                                     <div className="dbUserImg"><img src={userData[groupUserID] ? userData[groupUserID].profileImg : "/smile.png"}></img></div>
-                                    <span className="dbUserListName">{userData[groupUserID] ? userData[groupUserID].username : "" }</span>
+                                    <span className="dbUserListName">{userData[groupUserID] ? userData[groupUserID].username : ""}</span>
                                 </div>
                             </li>
                         )) : <></>}

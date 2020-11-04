@@ -109,7 +109,9 @@ body {
     width: 72px;
     height: 72px;
     border-radius: 100%;
-    background-color: darkgoldenrod;
+    background-color: grey;
+    background-image: url("/logo.png");
+    background-size: 100%;
     transition-property: border-radius;
     transition-duration: .1s;
 }
