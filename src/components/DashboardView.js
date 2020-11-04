@@ -69,7 +69,7 @@ const DashboardView = () => {
     if (user === undefined) return (<></>) //User hasn't initialised yet
     return (
         <div className="dbWrapper">
-            <div className="dbHeader">Discord (sort of)</div>
+            <div className="dbAppname">Lighthouse</div>
             <div className="dbMainContent">
                 <div className="dbGroupCol">
                     <div className="dbGroupHome">
@@ -100,11 +100,12 @@ const DashboardView = () => {
                 <div className="dbUsersCol">
                     <div className="dbColHeader"></div>
                     <div className="dbUserList"><ul>
-                        {groupData ? Object.entries(groupData.members).map(([groupUserID, groupUsername], index) => (
+                        {console.log(groupData)}
+                        {groupData && userData ? Object.entries(groupData.members).map(([groupUserID, groupUsername], index) => (
                             <li key={index} className="dbUserListItem">
                                 <div className="dbUser">
                                     <div className="dbUserImg"><img src={userData[groupUserID] ? userData[groupUserID].profileImg : "/smile.png"}></img></div>
-                                    <span className="dbUserListName">{groupUsername}</span>
+                                    <span className="dbUserListName">{userData[groupUserID] ? userData[groupUserID].username : "" }</span>
                                 </div>
                             </li>
                         )) : <></>}

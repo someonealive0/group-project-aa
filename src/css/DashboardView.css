@@ -15,11 +15,17 @@ body {
     flex-flow: column nowrap;
 }
 
-.dbHeader {
+.dbHeader, .dbAppname {
     margin: 0;
     padding: 0;
     background-color: rgb(32, 34, 37);
     height: 32px;
+}
+
+.dbAppname {
+    font-weight: 700;
+    padding-left: 10px;
+    font-size: 1.3rem;
 }
 
 .dbMainContent {

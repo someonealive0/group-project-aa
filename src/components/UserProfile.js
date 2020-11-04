@@ -9,17 +9,24 @@ import { Avatar, Button, Card, CardActionArea, CardActions, CardContent} from '@
 
 const UserProfile = () => {
     const currUser = useContext(userAuth)
+    const [userDetails, setUserDetails] = useState(undefined)
     console.log('uid', firebase.auth().currentUser)
+
+    useEffect(() => {
+        if (currUser) firebase.database().ref("userData").child(currUser.uid).on("value",(snapshot) => {
+            setUserDetails(snapshot.val())
+        })
+    }, [currUser])
     
     if (currUser === null){ return (<h1>Null</h1>)} //Redirect to landing page if currUser logged out
     else if (currUser === undefined) {return (<h1>Undefined</h1>)}
     else
-    var imgsrc = `https://robohash.org/${currUser.uid}`
+    var imgsrc = userDetails ? userDetails.profileImg : "/smile.png"
     return (
         <div>
             <Card className='user-profile-card'>
                 <CardContent className='user-profile-pic-holder'><img className='user-profile-pic' src={imgsrc}></img></CardContent>
-                <CardContent className='user-card-content'>{currUser.uid}</CardContent>
+                <CardContent className='user-card-content'>{currUser.uid}, {userDetails ? userDetails.username : ""}</CardContent>
                 <CardContent className='btn-container'><Button classname='edit-btn' variant='contained' color='primary'>Edit Profile</Button></CardContent>
             </Card>
         </div>
