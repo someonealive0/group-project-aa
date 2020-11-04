@@ -71,11 +71,30 @@ const DashboardView = () => {
         <div className="dbWrapper">
             <div className="dbHeader">Discord (sort of)</div>
             <div className="dbMainContent">
-                <div className="dbGroupCol"></div>
-                
-                <DBChannelCol authUserData={userData[user.uid]} currentChannel={currentChannel} setCurrentChannel={setCurrentChannelFn} 
-                    groupName={groupData ? groupData.groupName : ""} channels={groupData ? groupData.channels : null}/>
-               
+                <div className="dbGroupCol">
+                    <div className="dbGroupHome">
+                        <img className="dbGroupHomeImg" src="/logo.png"></img>
+                    </div>
+                    <div className="dbGroupList"><ul>
+                        <li><div className="dbGroup dbGroupCurrent">
+                            <img className="dbGroupImg" src="/logo.png"></img>
+                        </div></li>
+
+                        <li><div className="dbGroup">
+                            <img className="dbGroupImg" src="/logo.png"></img>
+                        </div></li>
+                        <li><div className="dbGroup">
+                            <img className="dbGroupImg" src="/logo.png"></img>
+                        </div></li>
+                        <li><div className="dbGroup">
+                            <img className="dbGroupImg" src="/logo.png"></img>
+                        </div></li>
+                    </ul></div>
+                </div>
+
+                <DBChannelCol authUserData={userData[user.uid]} currentChannel={currentChannel} setCurrentChannel={setCurrentChannelFn}
+                    groupName={groupData ? groupData.groupName : ""} channels={groupData ? groupData.channels : null} />
+
                 <DBMessagesCol user={user} currentChannel={currentChannel} userData={userData} />
 
                 <div className="dbUsersCol">
