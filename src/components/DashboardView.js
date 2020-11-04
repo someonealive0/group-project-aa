@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-ro
 import * as firebase from 'firebase'
 import '../css/DashboardView.css'
 
-import dbChannelCol from './dbChannelCol'
 import DBMessagesCol from './dbMessagesCol'
 import DBChannelCol from './dbChannelCol'
 
@@ -62,18 +61,40 @@ const DashboardView = () => {
         })
     }
 
+    const setCurrentChannelFn = (channelID) => {
+        setCurrentChannel({ "channelID": channelID, "channelData": groupData.channels[channelID] })
+    }
+
     if (user === null) return (<Redirect to="/" />) //Redirect to landing page if user logged out
     if (user === undefined) return (<></>) //User hasn't initialised yet
     return (
         <div className="dbWrapper">
             <div className="dbHeader">Discord (sort of)</div>
             <div className="dbMainContent">
-                <div className="dbGroupCol"></div>
-                {console.log(groupData)}
-                
-                <DBChannelCol authUserData={userData[user.uid]} currentChannel={currentChannel} setCurrentChannel={setCurrentChannel} 
-                    groupName={groupData ? groupData.groupName : ""} channels={groupData ? groupData.channels : null}/>
-               
+                <div className="dbGroupCol">
+                    <div className="dbGroupHome">
+                        <img className="dbGroupHomeImg" src="/logo.png"></img>
+                    </div>
+                    <div className="dbGroupList"><ul>
+                        <li><div className="dbGroup dbGroupCurrent">
+                            <img className="dbGroupImg" src="/logo.png"></img>
+                        </div></li>
+
+                        <li><div className="dbGroup">
+                            <img className="dbGroupImg" src="/logo.png"></img>
+                        </div></li>
+                        <li><div className="dbGroup">
+                            <img className="dbGroupImg" src="/logo.png"></img>
+                        </div></li>
+                        <li><div className="dbGroup">
+                            <img className="dbGroupImg" src="/logo.png"></img>
+                        </div></li>
+                    </ul></div>
+                </div>
+
+                <DBChannelCol authUserData={userData[user.uid]} currentChannel={currentChannel} setCurrentChannel={setCurrentChannelFn}
+                    groupName={groupData ? groupData.groupName : ""} channels={groupData ? groupData.channels : null} />
+
                 <DBMessagesCol user={user} currentChannel={currentChannel} userData={userData} />
 
                 <div className="dbUsersCol">
