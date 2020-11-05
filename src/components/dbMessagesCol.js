@@ -9,7 +9,7 @@ import en from 'javascript-time-ago/locale/en'
 import ReactTimeAgo from 'react-time-ago'
 TimeAgo.addDefaultLocale(en)
 
-const DBMessagesCol = ({ user, currentChannel, userData }) => {
+const DBMessagesCol = ({ user, currentChannel, userData, updateUserData }) => {
     const [messageCache, setMessageCache] = useState({})
     const [messageRefCache, setMessageRefCache] = useState({})
     const [messageInput, setMessageInput] = useState("")
@@ -47,6 +47,10 @@ const DBMessagesCol = ({ user, currentChannel, userData }) => {
                 channelMsgRefData.ref.on('child_added', (snapshot) => {
                     setShouldScroll(msgListRef.current.scrollTop >= msgListRef.current.scrollHeight - msgListRef.current.clientHeight - 100)
 
+                    if (!userData[snapshot.val().user]) {
+                        updateUserData(snapshot.val().user)
+                    }
+
                     setMessageCache((prev) => {
                         const message = { "msgID": snapshot.key, "msgDetails": snapshot.val() }
                         const newMsgList = prev[currentChannel.channelID].concat([message])
@@ -60,7 +64,6 @@ const DBMessagesCol = ({ user, currentChannel, userData }) => {
                     const changedMsgID = snapshot.key
 
                     setMessageCache((prev) => {
-                        const message = { "msgID": snapshot.key, "msgDetails": snapshot.val() }
                         const newMsgList = prev[currentChannel.channelID].map((message) => message.msgID == changedMsgID ? { "msgID": changedMsgID, "msgDetails": snapshot.val() } : message)
                         const updatedEntry = {}
                         updatedEntry[currentChannel.channelID] = newMsgList
@@ -92,7 +95,6 @@ const DBMessagesCol = ({ user, currentChannel, userData }) => {
     //Scroll page down when new messages added and user is at bottom of message list
     useLayoutEffect(() => {
         if (shouldScroll) {
-            console.log("scrolling")
             messagesEndRef.current.scrollIntoView()
             setShouldScroll(false)
         }

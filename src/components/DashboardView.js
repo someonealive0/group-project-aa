@@ -30,6 +30,7 @@ const DashboardView = () => {
             })
         }
 
+        //Get user details for current user (profileImg, username, etc.)
         if (user && !userData[user.uid]) {
             firebase.database().ref("userData").child(user.uid).once("value").then((snapshot) => {
                 setUserData((prev) => {
@@ -40,6 +41,7 @@ const DashboardView = () => {
             })
         }
 
+        //Setup listener for updates to groupData -- should eventually only grab groups the user is a part of
         if (groupData.empty) {
             firebase.database().ref('groupData').on("value", (snapshot) => { setGroupData(snapshot.val()) })
         }
@@ -51,13 +53,33 @@ const DashboardView = () => {
         if (currentGroup) {
             const mainChannel = groupData[currentGroup.id].channels
             const [channelID, channelData] = Object.entries(mainChannel)[0]
-            setCurrentChannel({"channelID": channelID, "channelData": channelData})
+            setCurrentChannel({ "channelID": channelID, "channelData": channelData })
+            
+            //Update userData for users in current group (get profileImg, usernames, etc.)
+            Object.entries(groupData[currentGroup.id].members).map(([userID, exists]) => {
+                if (!userData[userID]) {
+                    updateUserData(userID)
+                }
+                console.log(userID)
+            })
         }
     }, [currentGroup])
 
 
     const setCurrentChannelFn = (channelID) => {
         setCurrentChannel({ "channelID": channelID, "channelData": groupData[currentGroup.id].channels[channelID] })
+    }
+
+    const updateUserData = (uid) => {
+        console.log("no userdata", uid)
+
+        firebase.database().ref('userData').child(uid).on("value", (snapshot) => {
+            setUserData((prev) => {
+                const updatedUserData = {...prev}
+                updatedUserData[uid] = snapshot.val()
+                return updatedUserData
+            })
+        })
     }
 
     if (user === null) return (<Redirect to="/" />) //Redirect to landing page if user logged out
@@ -71,9 +93,8 @@ const DashboardView = () => {
                         <img className="dbGroupHomeImg" src="/logo.png"></img>
                     </div>
                     <div className="dbGroupList"><ul>
-                        {Object.entries(groupData).map(([groupID, groupDetails], index) => (
-                            <li key={index}><div className={currentGroup && currentGroup.id == groupID ? "dbGroup dbGroupCurrent" : "dbGroup"} onClick={() => setCurrentGroup({"id": groupID})}>
-                                {console.log(groupDetails)}
+                        {!groupData.empty && Object.entries(groupData).map(([groupID, groupDetails], index) => (
+                            <li key={index}><div className={currentGroup && currentGroup.id == groupID ? "dbGroup dbGroupCurrent" : "dbGroup"} onClick={() => setCurrentGroup({ "id": groupID })}>
                                 <img className="dbGroupImg" src={groupDetails.groupImg}></img>
                             </div></li>
                         ))}
@@ -83,7 +104,7 @@ const DashboardView = () => {
                 <DBChannelCol authUserData={userData[user.uid]} currentChannel={currentChannel} setCurrentChannel={setCurrentChannelFn}
                     groupName={currentGroup && groupData[currentGroup.id] ? groupData[currentGroup.id].groupName : ""} channels={currentGroup && groupData[currentGroup.id] ? groupData[currentGroup.id].channels : null} />
 
-                <DBMessagesCol user={user} currentChannel={currentChannel} userData={userData} />
+                <DBMessagesCol user={user} currentChannel={currentChannel} userData={userData} updateUserData={updateUserData} />
 
                 <div className="dbUsersCol">
                     <div className="dbColHeader"></div>
