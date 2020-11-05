@@ -116,29 +116,61 @@ body {
     transition-duration: .1s;
 }
 
-.dbGroupImg:hover {
+.dbGroup:hover .dbGroupImg {
     border-radius: 20px;
 }
 
-.dbGroupNameTooltip {
-    visibility: hidden;
-    width: 120px;
-    background-color: black;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
-    
-    /* Position the tooltip */
-    position: absolute;
-    z-index: 1;
-    top: -5px;
-    left: 105%;
+.dbGroupCurrent .dbGroupImg{
+    box-shadow: 5px 0px 0 0 white inset;
+    border-radius: 20px;
+}
+
+.tooltip {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    display: inline-block;
   }
   
-  .dbGroupImg:hover .dbGroupNameTooltip:hover {
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: max-content;
+    max-width: 290px;
+    min-height: 10px;
+    padding: 18px;
+    background-color: black;
+    color: #fff;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 3;
+    left: 105%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-items: center;
+    align-items: center;
+}
+
+.tooltiptext span {
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin: auto;
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    margin-top: -15px;
+    border-width: 15px;
+    border-style: solid;
+    border-color: transparent black transparent transparent;
+}
+  
+.dbGroup:hover .tooltiptext {
     visibility: visible;
-  }
+}
 
 .dbChannelCol {
     margin: 0;

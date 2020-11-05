@@ -54,7 +54,7 @@ const DashboardView = () => {
             const mainChannel = groupData[currentGroup.id].channels
             const [channelID, channelData] = Object.entries(mainChannel)[0]
             setCurrentChannel({ "channelID": channelID, "channelData": channelData })
-            
+
             //Update userData for users in current group (get profileImg, usernames, etc.)
             Object.entries(groupData[currentGroup.id].members).map(([userID, exists]) => {
                 if (!userData[userID]) {
@@ -75,7 +75,7 @@ const DashboardView = () => {
 
         firebase.database().ref('userData').child(uid).on("value", (snapshot) => {
             setUserData((prev) => {
-                const updatedUserData = {...prev}
+                const updatedUserData = { ...prev }
                 updatedUserData[uid] = snapshot.val()
                 return updatedUserData
             })
@@ -96,6 +96,7 @@ const DashboardView = () => {
                         {!groupData.empty && Object.entries(groupData).map(([groupID, groupDetails], index) => (
                             <li key={index}><div className={currentGroup && currentGroup.id == groupID ? "dbGroup dbGroupCurrent" : "dbGroup"} onClick={() => setCurrentGroup({ "id": groupID })}>
                                 <img className="dbGroupImg" src={groupDetails.groupImg}></img>
+                                <div class="tooltip"><span class="tooltiptext"><span>{groupDetails.groupName}</span></span></div>
                             </div></li>
                         ))}
                     </ul></div>
