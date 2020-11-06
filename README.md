@@ -26,27 +26,11 @@ Run it within the root directory
 
 ### Back-End
 
-The command `npm serve:dev` starts the Express backend, which is mounted with Firebase Functions, with NodeMon to automatically update changes (it will automatically restart upon changing anything in the backend files). Default port is 5000. The most recent built application can be viewed at `localhost:5000`, however updating the application on the front-end and have them displayed here, it's required to execute `npm build` again.
+The command `npm serve:dev` starts the Express backend within the `functions/`, which is mounted with Firebase Functions, with NodeMon to automatically update changes (it will automatically restart upon changing anything in the backend files). Default port is 5000. The most recent built application can be viewed at `localhost:5000`, however updating the application on the front-end and have them displayed here, it's required to execute `npm build` again.
 
 ### Front-End
 
-The command `npm start` starts the React font-end server. This would be used to view any changes that are made to the application, as static-files served by Express server require the command `npm run build` to be executed for it to see any changes. After staging and committing the changes you made to the files, push it to the master repository.
-
-## Origional stuff
-
-## Running the server
-
-### Express/Firebase Back-End
-
-Use the command `npm serve:dev` within the `functions/` directory to run the Express server mounted with Firebase Functions, with Nodemon to automatically update changes. Default port is 5000. You can view the most recently built app at `localhost:5000`, but to update any changes you've made on the front-end and have them reflected here, you need to run `npm build` again.
-
-### React Front-End
-
-Use the command `npm start` to run the React server. Default port is 3000. Make changes to the front-end here and you can view them straight away at `localhost:3000`. Communication to the back-end is rerouted via a proxy to port 5000.
-
-## Deployment
-
-Use the command `npm run deploy` to deploy the app to firebase. You will likely get a prompt to sign into firebase with your google account first (group members use student emails for correct permissions).
+The command `npm start` starts the React font-end server. This would be used to view any changes that are made to the application, as static-files served by Express server require the command `npm run build` to be executed for it to see any changes. After staging and committing the changes you made to the files, push it to the master repository. Default port is 3000. Make changes to the front-end here and you can view them straight away at `localhost:3000`. Communication to the back-end is rerouted via a proxy to port 5000.
 
 ## TODO
 
