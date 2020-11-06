@@ -32,6 +32,10 @@ The command `npm serve:dev` starts the Express backend within the `functions/`, 
 
 The command `npm start` starts the React font-end server. This would be used to view any changes that are made to the application, as static-files served by Express server require the command `npm run build` to be executed for it to see any changes. After staging and committing the changes you made to the files, push it to the master repository. Default port is 3000. Make changes to the front-end here and you can view them straight away at `localhost:3000`. Communication to the back-end is rerouted via a proxy to port 5000.
 
+## Database Initilisations
+
+## Project Structure
+
 ## TODO
 
 - Implement firebase access rules
