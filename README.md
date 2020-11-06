@@ -8,7 +8,7 @@ Run `npm install` from within the root directory _and_ in the `functions` direct
 
 ## Deployment
 
-Application has been deployed using Firebase and is available at https://comp3120-groupaa-project.web.app and comp3120-groupaa-project.firebaseapp.com. By default, every Firebase project offers free sub-domains; including on web.app and firebaseapp.com. The deployment itself follows number of steps that can be viewed at https://firebase.google.com/docs/hosting#implementation_path. Application has already number of predefined users that can be used a credentials for login
+Application has been deployed using Firebase and is available at https://comp3120-groupaa-project.web.app and https://comp3120-groupaa-project.firebaseapp.com. By default, every Firebase project offers free sub-domains; including on web.app and firebaseapp.com. The deployment itself follows number of steps that can be viewed at https://firebase.google.com/docs/hosting#implementation_path. Application has already number of predefined users that can be used a credentials for login
 
 For re-producing this application, there are number of items that need to be addressed in order for the application to work properly. After cloning the application repository and installed all dependencies via 'npm install', make sure to create a new '.env' file based of existing sample file '.env.sample' provided. The file contains the environmental variables that are necessary for the application to access firebase and to generate and validate JWT tokens at your local Express and node.js servers. It should contain references to your own database and a JWT secret (make sure to add '.env' file into '.gitignore').
 
