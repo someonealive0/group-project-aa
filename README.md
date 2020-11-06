@@ -2,10 +2,6 @@
 
 This group project was create using [Create React App](https://github.com/facebook/create-react-app)
 
-## Installation
-
-Run `npm install` from within the root directory _and_ in the `functions` directory (this is a side-effect of how firebase manages deployment). Then make a `.env` file in the root directory which appropriately mimics the `.env.sample` file provided (_this is currently empty_). Then run `npm build` from the root directory.
-
 ## Deployment
 
 Application has been deployed using Firebase and is available at https://comp3120-groupaa-project.web.app and https://comp3120-groupaa-project.firebaseapp.com. By default, every Firebase project offers free sub-domains; including on web.app and firebaseapp.com. The deployment itself follows number of steps that can be viewed at https://firebase.google.com/docs/hosting#implementation_path. Application has already number of predefined users that can be used a credentials for login
