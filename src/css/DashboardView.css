@@ -492,6 +492,14 @@ body {
     word-break: break-all;
 }
 
+.dbMsgMention {
+    color: rgb(114, 137, 218)
+}
+
+.dbMsgMention:hover {
+    text-decoration: underline;
+}
+
 .dbSubmitMsg {
     margin: 0 25px 36px 25px;
     padding: 0;
