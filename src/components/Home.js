@@ -6,19 +6,14 @@ import {userAuth} from '../App'
 import Loading from './Loading';
 import styled from 'styled-components';
 
-const Button = styled.button`
+const Button = styled.button
+`
 background-color: black;
 color: white;
 font-size: 20px;
 padding: 10px 60px;
 border-radius: 5px;
 margin: 10px 0px;
-cursor: pointer;
-&:disabled {
-  color: grey;
-  opacity: 0.7;
-  cursor: default;
-}
 `;
 const ButtonGroup = styled.div`display: block, margin:auto`
 
@@ -49,8 +44,8 @@ const Home = () => {
             <ButtonGroup>
                 <Link to='/me'><Button>User Profile</Button></Link>
                 <Link to="/dashboard"><Button>Dashboard</Button></Link>
-                <Button variant="light" onClick={() => testService.test().then(result => console.log(result))}>Log a test message</Button>
-                <Button variant="light" onClick={() => firebase.auth().signOut()}>Log out</Button>
+                <Button onClick={() => testService.test().then(result => console.log(result))}>Log a test message</Button>
+                <Button onClick={() => firebase.auth().signOut()}>Log out</Button>
             </ButtonGroup>
             <img style={{display: "block", marginLeft: "auto", marginRight: "auto", width: "30%"}} src="/logo.png"></img>
         </div>

@@ -100,6 +100,7 @@ const DashboardView = () => {
                                 <div class="tooltip"><span class="tooltiptext"><span>{groupDetails.groupName}</span></span></div>
                             </div></li>
                         ))}
+                        <li><img style={{display: "block", marginLeft: "auto", marginRight: "auto"}}onClick={event => window.location.href='/home'} src="/back.png"></img></li>
                     </ul></div>
                 </div>
 
@@ -121,7 +122,7 @@ const DashboardView = () => {
                             </li>
                         )) : <></>}
                     </ul></div>
-                </div>
+                </div>            
             </div>
         </div>
     )
