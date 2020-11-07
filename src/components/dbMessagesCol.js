@@ -84,8 +84,15 @@ const DBMessagesCol = ({ user, currentChannel, userData, updateUserData }) => {
                 channelMsgRefData.ref.on('child_changed', (snapshot) => {
                     const changedMsgID = snapshot.key
 
+                    const message = { "msgID": changedMsgID, "msgDetails": snapshot.val() }
+                    const prunedContent = reactStringReplace(message.msgDetails.content.trim().toLowerCase(), regexMentions, (match, i) => (
+                        !usernames["*empty"] && usernames[match.toLowerCase()] ? <span className="dbMsgMention">@{match}</span> : `@${match}`
+                    ))
+
+                    message.msgDetails.content = prunedContent
+
                     setMessageCache((prev) => {
-                        const newMsgList = prev[currentChannel.channelID].map((message) => message.msgID == changedMsgID ? { "msgID": changedMsgID, "msgDetails": snapshot.val() } : message)
+                        const newMsgList = prev[currentChannel.channelID].map((msg) => msg.msgID == changedMsgID ? message : msg)
                         const updatedEntry = {}
                         updatedEntry[currentChannel.channelID] = newMsgList
                         return { ...prev, ...updatedEntry }
@@ -163,17 +170,23 @@ const DBMessagesCol = ({ user, currentChannel, userData, updateUserData }) => {
                                     <div className="dbMsgContent">{msgDetails.content}</div>
                                 </div>
                             </div>
+                            {currentChannel && messageRefCache[currentChannel.channelID] && user.uid === msgDetails.user ?
+                                <div className="dbMsgTooltip"><span className="dbMsgTooltiptext">
+                                    <img src="/trash.png" onClick={() => messageRefCache[currentChannel.channelID].ref.child(msgID).remove()}></img>
+                                </span></div> 
+                            : <></>}
                         </li>
                     )
                 }) : <></>}
             </ul><div ref={messagesEndRef} /></div>
 
-            <div className="dbSubmitMsg">
+            
+            {currentChannel ? <div className="dbSubmitMsg">
                 <div className="dbSubmitMedia"><div className="dbSubmitMediaIcon">+</div></div>
                 <form className="dbSubmitForm" onSubmit={handleMessageSubmit}>
                     <input type="text" placeholder="Message this channel" value={messageInput} onChange={((event) => setMessageInput(event.target.value))}></input>
                 </form>
-            </div>
+            </div> : <></>}
         </div>
     )
 }
