@@ -528,6 +528,7 @@ body {
     justify-items: center;
     align-items: center;
     box-shadow: 0 0 5px rgb(37, 37, 37);
+    background-color: rgb(50, 53, 59);
 }
 
 .dbMsgListItem:hover .dbMsgTooltiptext {
@@ -535,7 +536,7 @@ body {
 }
 
 .dbMsgTooltiptext img {
-    margin: 0;
+    margin: auto;
     padding: 0;
     width: 50px;
     height: 50px;
@@ -545,10 +546,6 @@ body {
 }
 
 .dbMsgTooltiptext img:hover {
-    margin: 0;
-    padding: 0;
-    width: 50px;
-    height: 50px;
     background-color: rgb(58, 62, 68);
 }
 
