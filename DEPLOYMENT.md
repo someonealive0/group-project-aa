@@ -18,7 +18,7 @@ To reproduce the application, there are number of items that need to be addresse
 
 ## Quickstart guide - How to Run and Build the Project
 
-To start the local front and backend servers run `npm run serve:dev` in the `functions/` directory and `npm start` in the `root` directory. Make sure that you have the [Firebase CLI](https://firebase.google.com/docs/cli) installed first!
+To start the local front and backend servers run `npm run serve:dev` in the `functions/` directory and `npm start` in the `root` directory. Make sure that you have the [Firebase CLI](https://firebase.google.com/docs/cli) installed first, and installed Firebase Tools with the command `npm install -g firebase-tools`
 
 ### Back-End
 
