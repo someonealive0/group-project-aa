@@ -45,7 +45,8 @@ const DBMessagesCol = ({ user, currentChannel, userData, updateUserData }) => {
             if (channelMsgRefData && !channelMsgRefData.listening) {
 
                 channelMsgRefData.ref.on('child_added', (snapshot) => {
-                    setShouldScroll(msgListRef.current.scrollTop >= msgListRef.current.scrollHeight - msgListRef.current.clientHeight - 100)
+                    if (msgListRef.current)
+                        setShouldScroll(msgListRef.current.scrollTop >= msgListRef.current.scrollHeight - msgListRef.current.clientHeight - 100)
 
                     if (!userData[snapshot.val().user]) {
                         updateUserData(snapshot.val().user)
@@ -73,7 +74,8 @@ const DBMessagesCol = ({ user, currentChannel, userData, updateUserData }) => {
 
                 channelMsgRefData.ref.on('child_removed', (snapshot) => {
                     const deletedMsgID = snapshot.key
-                    setShouldScroll(msgListRef.current.scrollTop >= msgListRef.current.scrollHeight - msgListRef.current.clientHeight - 100)
+                    if (msgListRef.current)
+                        setShouldScroll(msgListRef.current.scrollTop >= msgListRef.current.scrollHeight - msgListRef.current.clientHeight - 100)
 
                     setMessageCache((prev) => {
                         const newMsgList = prev[currentChannel.channelID].filter((message) => message.msgID != deletedMsgID)
@@ -94,7 +96,7 @@ const DBMessagesCol = ({ user, currentChannel, userData, updateUserData }) => {
 
     //Scroll page down when new messages added and user is at bottom of message list
     useLayoutEffect(() => {
-        if (shouldScroll) {
+        if (shouldScroll && messagesEndRef.current) {
             messagesEndRef.current.scrollIntoView()
             setShouldScroll(false)
         }
@@ -124,7 +126,8 @@ const DBMessagesCol = ({ user, currentChannel, userData, updateUserData }) => {
                         <li key={index} className="dbMsgListItem">
                             <div className="dbMessage">
                                 <div className="dbMsgImg">
-                                    <img src={userData[msgDetails.user] ? userData[msgDetails.user].profileImg : "/smile.png"}></img>
+                                    <img src={userData[msgDetails.user] ? userData[msgDetails.user].profileImg : "/smile.png"} 
+                                        onError={(event) =>  event.target.src = '/smile.png'}></img>
                                 </div>
                                 <div className="dbMsgContentWrap">
                                     <div className="dbMsgInfo">

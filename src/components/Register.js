@@ -71,7 +71,7 @@ const Register = () => {
           dbUserDataRef.child(result.user.uid).set({
             "username": username,
             "email": email,
-            "profileImg": "https://robohash.org/" + username,
+            "profileImg": "https://avatars.dicebear.com/api/male/" + username + ".svg",
             "groups": []
           }).catch((error) => console.log(error))
 

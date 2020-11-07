@@ -94,7 +94,8 @@ const DashboardView = () => {
                     </div>
                     <div className="dbGroupList"><ul>
                         {!groupData.empty && Object.entries(groupData).map(([groupID, groupDetails], index) => (
-                            <li key={index}><div className={currentGroup && currentGroup.id == groupID ? "dbGroup dbGroupCurrent" : "dbGroup"} onClick={() => setCurrentGroup({ "id": groupID })}>
+                            <li key={index}><div className={currentGroup && currentGroup.id == groupID ? "dbGroup dbGroupCurrent" : "dbGroup"} 
+                                onClick={() => setCurrentGroup({ "id": groupID })}>
                                 <img className="dbGroupImg" src={groupDetails.groupImg}></img>
                                 <div class="tooltip"><span class="tooltiptext"><span>{groupDetails.groupName}</span></span></div>
                             </div></li>
@@ -113,7 +114,8 @@ const DashboardView = () => {
                         {currentGroup && groupData[currentGroup.id] ? Object.entries(groupData[currentGroup.id].members).map(([groupUserID, exists], index) => (
                             <li key={index} className="dbUserListItem">
                                 <div className="dbUser">
-                                    <div className="dbUserImg"><img src={userData[groupUserID] ? userData[groupUserID].profileImg : "/smile.png"}></img></div>
+                                    <div className="dbUserImg"><img src={userData[groupUserID] ? userData[groupUserID].profileImg : "/smile.png"} 
+                                        onError={(event) =>  event.target.src = '/smile.png'}></img></div>
                                     <span className="dbUserListName">{userData[groupUserID] ? userData[groupUserID].username : ""}</span>
                                 </div>
                             </li>

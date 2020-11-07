@@ -25,7 +25,8 @@ const DBChannelCol = ({ currentChannel, setCurrentChannel, groupName, channels, 
                 )) : <></>}
             </ul></div>
             <div className="dbUserInfo">
-                <div className="dbUserImg"><img src={authUserData ? authUserData.profileImg : "/smile.png"}></img></div>
+                <div className="dbUserImg"><img src={authUserData ? authUserData.profileImg : "/smile.png"} 
+                    onError={(event) =>  event.target.src = '/smile.png'}></img></div>
                 <span className="dbUsername">{authUserData ? authUserData.username : "username"}</span>
             </div>
         </div>
