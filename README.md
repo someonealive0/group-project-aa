@@ -36,7 +36,7 @@ On the outset of this project, our group was aiming to implement many additional
 
 ## Group AA
 - Nathan Soares (45382417)
-> Front and Back-end development, misc tasks
+> Front and Back-end development, Database Integration
 - Michael Dimovski (45270708)
 > Design, testing, reports, misc tasks
 - Robert Kanepe (45364265)
