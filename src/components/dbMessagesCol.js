@@ -23,7 +23,7 @@ const DBMessagesCol = ({ user, currentChannel, userData, updateUserData }) => {
 
     useEffect(() => {
         if (usernames["*empty"]) {
-            firebase.database().ref('users').on("value", (snapshot) => {setUsernames(snapshot.val()); console.log(snapshot.val())})
+            firebase.database().ref('users').on("value", (snapshot) => setUsernames(snapshot.val()))
         }
     }, [])
 
@@ -67,10 +67,10 @@ const DBMessagesCol = ({ user, currentChannel, userData, updateUserData }) => {
                     // Check for hashtags
                     const message = { "msgID": snapshot.key, "msgDetails": snapshot.val() }
                     const prunedContent = reactStringReplace(message.msgDetails.content.trim().toLowerCase(), regexMentions, (match, i) => (
-                        !usernames["*empty"] && usernames[match.toLowerCase()] ? <span className="dbMsgMention">@{match}</span> : `@${match}`
+                        !usernames["*empty"] && usernames[match.toLowerCase()] ? 
+                            <span key={message.msgID + i} className="dbMsgMention">@{match}</span> : `@${match}`
                     ))
 
-                    console.log(prunedContent)
                     message.msgDetails.content = prunedContent
                     setMessageCache((prev) => {
                         const newMsgList = prev[currentChannel.channelID].concat([message])
@@ -140,11 +140,11 @@ const DBMessagesCol = ({ user, currentChannel, userData, updateUserData }) => {
     return (
         <div className="dbMessagesCol">
             <div className="dbColHeader">
-                <div className="dbCurrentChannel">
+                {currentChannel ? <div className="dbCurrentChannel">
                     <span className="dbCurrentChannelIcon">#</span>
                     <span className="dbCurrentChannelName">{currentChannel ? currentChannel.channelData.name : <></>}</span>
                     <span className="dbChannelDesc">{currentChannel ? currentChannel.channelData.description : <></>}</span>
-                </div>
+                </div> : <></>}
             </div>
 
             <div className="dbMsgList" ref={msgListRef}><ul>

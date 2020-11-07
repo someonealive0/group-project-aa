@@ -60,7 +60,6 @@ const DashboardView = () => {
                 if (!userData[userID]) {
                     updateUserData(userID)
                 }
-                console.log(userID)
             })
         }
     }, [currentGroup])
@@ -71,8 +70,6 @@ const DashboardView = () => {
     }
 
     const updateUserData = (uid) => {
-        console.log("no userdata", uid)
-
         firebase.database().ref('userData').child(uid).on("value", (snapshot) => {
             setUserData((prev) => {
                 const updatedUserData = { ...prev }

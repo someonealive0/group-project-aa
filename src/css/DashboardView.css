@@ -527,19 +527,29 @@ body {
     flex-flow: column nowrap;
     justify-items: center;
     align-items: center;
-    background-color: rgb(50, 53, 59);
-    box-shadow: 0 0 10px black;
-}
-
-.dbMsgTooltiptext span {
-    font-size: 1.5rem;
-    font-weight: 700;
-    text-align: center;
-    margin: auto;
+    box-shadow: 0 0 5px rgb(37, 37, 37);
 }
 
 .dbMsgListItem:hover .dbMsgTooltiptext {
     visibility: visible;
+}
+
+.dbMsgTooltiptext img {
+    margin: 0;
+    padding: 0;
+    width: 50px;
+    height: 50px;
+    background-color: rgb(50, 53, 59);
+    transition: background-color 0.2s ease;
+    border-radius: 6px;
+}
+
+.dbMsgTooltiptext img:hover {
+    margin: 0;
+    padding: 0;
+    width: 50px;
+    height: 50px;
+    background-color: rgb(58, 62, 68);
 }
 
 .dbSubmitMsg {
