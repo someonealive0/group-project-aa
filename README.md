@@ -2,7 +2,7 @@
 
 This group project was created using [Create React App](https://github.com/facebook/create-react-app)
 
-## Deployment
+## Deployment Details
 
 This application has been deployed with Google Firebase and is available at the following addresses:
 
@@ -20,7 +20,7 @@ To reproduce the application, there are number of items that need to be addresse
 
 ### Quickstart guide 
 
-To start the local front and backend servers run `npm run serve:dev` in the `functions/` directory and `npm start` in the `root` directory.
+To start the local front and backend servers run `npm run serve:dev` in the `functions/` directory and `npm start` in the `root` directory. Make sure that you have the [Firebase CLI](https://firebase.google.com/docs/cli) installed first!
 
 ### Back-End
 
@@ -30,7 +30,13 @@ The command `npm run serve:dev` starts the Express backend within the `functions
 
 The command `npm start` starts the React font-end server. This would be used to view any changes that are made to the application, as static-files served by Express server require the command `npm run build` to be executed for it to see any changes. After staging and committing the changes you made to the files, push it to the master repository. Default port is 3000. Make changes to the front-end here and you can view them straight away at `localhost:3000`. Communication to the back-end is rerouted via a proxy to port 5000.
 
+### Deploying
+
+To deploy your changes to the live production build, first run `npm run build` in the `root` directory, then run `npm run deploy` in the `/functions` directory.
+
 ## Database Initilisations
+
+This application uses Google's [Firebase Realtime Database](https://firebase.google.com/docs/database) for data storage. In the application's current state, user data is added to the database upon registration, and similarly messages are added to the database upon being submitted by users. However, the automatic creation of groups is still a work in progress, and as such new groups need to be added manually to the database.
 
 ## Project Structure
 
