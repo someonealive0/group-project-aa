@@ -1,28 +1,30 @@
-# COMP3120 Group AA Application
+# COMP3120 Group AA Application - Lighthouse Realtime Chat
 
-This group project was create using [Create React App](https://github.com/facebook/create-react-app)
+This group project was created using [Create React App](https://github.com/facebook/create-react-app)
 
 ## Deployment
 
-Application has been deployed using Firebase and is available at https://comp3120-groupaa-project.web.app and https://comp3120-groupaa-project.firebaseapp.com. By default, every Firebase project offers free sub-domains; including on web.app and firebaseapp.com. The deployment itself follows number of steps that can be viewed at https://firebase.google.com/docs/hosting#implementation_path. Application has already number of predefined users that can be used a credentials for login
+This application has been deployed with Google Firebase and is available at the following addresses:
 
-For re-producing this application, there are number of items that need to be addressed in order for the application to work properly. After cloning the application repository and installed all dependencies via `npm install`, make sure to create a new `.env` file based of existing sample file `.env.sample` provided. The file contains the environmental variables that are necessary for the application to access firebase and to generate and validate JWT tokens at your local Express and node.js servers. It should contain references to your own database and a JWT secret (make sure to add `.env` file into `.gitignore`).
+- https://comp3120-groupaa-project.web.app
+- https://comp3120-groupaa-project.firebaseapp.com
+
+By default, every Firebase project offers free sub-domains at web.app and firebaseapp.com. The deployment itself follows a number of steps that are best described within the official Firebase documentation at https://firebase.google.com/docs/hosting#implementation_path. The application already has a number of predefined users that can be used as credentials for login, and email resgistration is also supported.
+
+To reproduce the application, there are number of items that need to be addressed in order for the application to work properly:
+
+1. After cloning the application repository, install its dependencies via `npm install` in both the `root` directory *and* the `/functions` directory (this is an artefact of how Firebase handles deployment)
+2. Create a new `.env` file based of existing sample file `.env.sample` provided. The file contains the environmental variables that are necessary for the application to access firebase and to generate and validate JWT tokens at your local Express and node.js servers. It should contain references to your own database and a JWT secret (make sure to add `.env` file into `.gitignore`).
 
 ## Running and Updating the Application
 
-For locally running and updating the application, run the following commands in separate console tabs:
+### Quickstart guide 
 
-Run it within `functions/` directory
-
-- npm serve:dev
-
-Run it within the root directory
-
-- npm start
+To start the local front and backend servers run `npm run serve:dev` in the `functions/` directory and `npm start` in the `root` directory.
 
 ### Back-End
 
-The command `npm serve:dev` starts the Express backend within the `functions/`, which is mounted with Firebase Functions, with NodeMon to automatically update changes (it will automatically restart upon changing anything in the backend files). Default port is 5000. The most recent built application can be viewed at `localhost:5000`, however updating the application on the front-end and have them displayed here, it's required to execute `npm build` again.
+The command `npm run serve:dev` starts the Express backend within the `functions/`, which is mounted with Firebase Functions, with NodeMon to automatically update changes (it will automatically restart upon changing anything in the backend files). Default port is 5000. The most recent built application can be viewed at `localhost:5000`, however updating the application on the front-end and have them displayed here, it's required to execute `npm build` again.
 
 ### Front-End
 
