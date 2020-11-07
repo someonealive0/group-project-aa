@@ -6,6 +6,7 @@ import '../css/DashboardView.css'
 import { useContext } from 'react'
 import { userAuth } from '../App'
 import { Avatar, Button, Card, CardActionArea, CardActions, CardContent} from '@material-ui/core'
+import styled from 'styled-components';
 
 const UserProfile = () => {
     const currUser = useContext(userAuth)
@@ -28,6 +29,7 @@ const UserProfile = () => {
                 <CardContent className='user-profile-pic-holder'><img className='user-profile-pic' src={imgsrc}></img></CardContent>
                 <CardContent className='user-card-content'>{currUser.uid}, {userDetails ? userDetails.username : ""}</CardContent>
                 <CardContent className='btn-container'><Button classname='edit-btn' variant='contained' color='primary'>Edit Profile</Button></CardContent>
+                <img src="/backInBlack.png" style={{padding:"10px"}} onClick={event => window.location.href='/home'}></img>
             </Card>
         </div>
     )

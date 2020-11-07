@@ -2,43 +2,50 @@
 
 This group project was created using [Create React App](https://github.com/facebook/create-react-app)
 
-## Deployment Details
+## Project Outline
+The application we have created is a messaging platform where users can communicate with each other in real-time; taking inspiration form the popular messaging platform [Discord](https://discord.com/). Users are able to communicate with each other or, if they prefer, create groups where they can message other users who are also part of that group. This project was aimed at capturing a young demographic by creating a simple, clutter-free interface that allows communication without any distraction. We aimed to build a fully featured application but with the tight time constrainsts were limited to what we could achieve; especially working with new components and on new platforms including [firebase](https://firebase.google.com/).  
 
-This application has been deployed with Google Firebase and is available at the following addresses:
+## Description of MVP
+The MVP was able to include the functionality we aimed for at the outset in the project proposal. These include:
+- User registration and login
+- User sign-out
+- Creating chat groups
+- Joining groups
+- View user profiles
+- Unique user profile images
+- Group Images
+- Real-time messaging (appears as each user posts, continuously scrolls to the latest message)
+- Multiple views (for each group chat)
 
-- https://comp3120-groupaa-project.web.app
-- https://comp3120-groupaa-project.firebaseapp.com
+As mentioned, the limited project timeline meant we needed to work efficiently. We first set up the firebase and Github repositories, created a base application and implemented some basic functionality. We then decided on what features we would like to implement and what was possible in the given timeframe. With the remaining time we populated the database, implemented the listed features, revised the features, implemented some styling and worked on more (some unsuccessfully, which we have included below to look at in the future).
 
-By default, every Firebase project offers free sub-domains at web.app and firebaseapp.com. The deployment itself follows a number of steps that are best described within the official Firebase documentation at https://firebase.google.com/docs/hosting#implementation_path. The application already has a number of predefined users that can be used as credentials for login, and email resgistration is also supported.
+## Guide to Project Source Code
 
-To reproduce the application, there are number of items that need to be addressed in order for the application to work properly:
 
-1. After cloning the application repository, install its dependencies via `npm install` in both the `root` directory *and* the `/functions` directory (this is an artefact of how Firebase handles deployment)
-2. Create a new `.env` file based of existing sample file `.env.sample` provided. The file contains the environmental variables that are necessary for the application to access firebase and to generate and validate JWT tokens at your local Express and node.js servers. It should contain references to your own database and a JWT secret (make sure to add `.env` file into `.gitignore`).
+## Next Steps in the Future
+On the outset of this project, our group was aiming to implement many additional features and functionality compared to what was achieved in the end. The group hoped to create a much more complex web application but understood that the limited time would result in a less featured MVP. The deployed application contains the base components for the application but our proposal listed some more comprehensive additions that we would like to add in the future including:
+- Auido feedback for actions when receiving messages
+- Implementing a News API that sends through the latest headline every 'x' minutes into the messaging feed
+- Automated messages (similar to News API; a bot that would display automated messages at given increments)
+- Implement testing for all components (unsuccessfully implemented, removed due to not functioning correctly with firebase)
+- Creating and switching between sub-groups
+- Video embedding
+- Audio messaging
+- Content filters
 
-## Running and Updating the Application
 
-### Quickstart guide 
+## Group AA
+- Nathan Soares (45382417)
+> Front and Back-end development, misc tasks
+- Michael Dimovski (45270708)
+> Design, testing, reports, misc tasks
+- Robert Kanepe (45364265)
+> Database, design, misc tasks
+- Bhavya Bhavsar (45560935)
+> Front and Back-end development, misc tasks
 
-To start the local front and backend servers run `npm run serve:dev` in the `functions/` directory and `npm start` in the `root` directory. Make sure that you have the [Firebase CLI](https://firebase.google.com/docs/cli) installed first!
 
-### Back-End
-
-The command `npm run serve:dev` starts the Express backend within the `functions/`, which is mounted with Firebase Functions, with NodeMon to automatically update changes (it will automatically restart upon changing anything in the backend files). Default port is 5000. The most recent built application can be viewed at `localhost:5000`, however updating the application on the front-end and have them displayed here, it's required to execute `npm build` again.
-
-### Front-End
-
-The command `npm start` starts the React font-end server. This would be used to view any changes that are made to the application, as static-files served by Express server require the command `npm run build` to be executed for it to see any changes. After staging and committing the changes you made to the files, push it to the master repository. Default port is 3000. Make changes to the front-end here and you can view them straight away at `localhost:3000`. Communication to the back-end is rerouted via a proxy to port 5000.
-
-### Deploying
-
-To deploy your changes to the live production build, first run `npm run build` in the `root` directory, then run `npm run deploy` in the `/functions` directory.
-
-## Database Initilisations
-
-This application uses Google's [Firebase Realtime Database](https://firebase.google.com/docs/database) for data storage. In the application's current state, user data is added to the database upon registration, and similarly messages are added to the database upon being submitted by users. However, the automatic creation of groups is still a work in progress, and as such new groups need to be added manually to the database.
-
-## Project Structure
+***
 
 ## TODO
 
