@@ -1,6 +1,6 @@
 # COMP3120 Group AA Application - Lighthouse Realtime Chat
 
-This group project was created using [Create React App](https://github.com/facebook/create-react-app)
+This group project was created using [Create React App](https://github.com/facebook/create-react-app). A video explanation is available in the `screenshots` under the file names `part1` and `part2`.
 
 ## Project Outline
 The application we have created is a messaging platform where users can communicate with each other in real-time; taking inspiration form the popular messaging platform [Discord](https://discord.com/). Users are able to communicate with each other or, if they prefer, create groups where they can message other users who are also part of that group. This project was aimed at capturing a young demographic by creating a simple, clutter-free interface that allows communication without any distraction. We aimed to build a fully featured application but with the tight time constrainsts were limited to what we could achieve; especially working with new components and on new platforms including [firebase](https://firebase.google.com/).  
@@ -20,18 +20,21 @@ The MVP was able to include the functionality we aimed for at the outset in the 
 As mentioned, the limited project timeline meant we needed to work efficiently. We first set up the firebase and Github repositories, created a base application and implemented some basic functionality. We then decided on what features we would like to implement and what was possible in the given timeframe. With the remaining time we populated the database, implemented the listed features, revised the features, implemented some styling and worked on more (some unsuccessfully, which we have included below to look at in the future).
 
 ## Guide to Project Source Code
-The application is simple by nature as an instant messaing platform.
+The application is simple by nature as an instant messaing platform, though the implementation becomes quite complex to ensure that multiple users can access the application in a synchronous manner without breaking the application.
+
 Users are able to:
-- Sign in
+- Sign in with an email and password or with Google
 - Log out
 - View their user profile
 - Go to the dashboard where they can message groups and rooms in real-time
+- Add new channels to groups
+- Mention other users with a @ tag
 
-The dashboard is the main functionality of the application and where users will spend most of thier time. Users are able to view and join chats in groups as well as rooms within these groups to futher distinguish certain chat rooms between users. All messages appear in real time after a users sends a message with timestamps that update too. Users can tage each other and delete messages by pressing the trash can next to any of their messages which will remove it form the conversation.
+The dashboard is the main functionality of the application and where users will spend most of thier time. Users are able to view and join chats in groups as well as rooms within these groups to futher distinguish certain chat rooms between users. All messages appear in real time after a users sends a message with timestamps that update too. Users can tag each other and delete messages by pressing the trash can next to any of their messages which will remove it from the conversation.
 
-Styling was done with a combination of css, inline styling and Material-UI for the bulk of the work, which gave us a clean looking application with a relatively quick styling process and design modularity and customisability.
+Styling was done with a combination of css, inline styling and Material-UI for the bulk of the work, which gave us a clean looking application with a high degree of design modularity and customisability.
 
-The project is seperated into the functions folder which contains the middleware and controller for the api. The bulk of the functionality is contained in the src folder with the main base application files as well as the folders housing the styling, services and most importantly all the components. 
+The project is seperated into the functions folder which contains the Firebase/Express backend and middleware with which to call the api. The bulk of the functionality is contained in the src folder with the main base application files as well as the folders housing the styling, services and most importantly all the components. Calls to the custom Express backend are rare as the Firebase library handles the vast majority of the application's functionality in its current limited state. The backend is ready for further development as it is already setup with Firebase Functions.
 
 ### Components
 - Spinner: displayed to users between components loading.
@@ -47,15 +50,15 @@ The project is seperated into the functions folder which contains the middleware
 - Firebase: Below is a screenshot of an example realtime database in firebase
 ![Firebase](SCREENSHOTS/firebase.png)
 
-Check the [SCREENSHOTS](SCREENSHOTS) folder out for more images of the application in action.
+Check the [SCREENSHOTS](SCREENSHOTS) folder out for more images of the application in action and the explanation videos (`part1` and `part2`).
 
 ## Next Steps in the Future
-On the outset of this project, our group was aiming to implement many additional features and functionality compared to what was achieved in the end. The group hoped to create a much more complex web application but understood that the limited time would result in a less featured MVP. The deployed application contains the base components for the application but our proposal listed some more comprehensive additions that we would like to add in the future including:
+On the outset of this project, our group was aiming to implement further additional features and functionality than what was achieved in the end, however significant progress was made in implementing the foundational functionality required for the application, namely the seperation of messages in channels and groups, and the realtime chat updates. If the group had more time than the limited windows available, we would hope to implement a number of extra features to improve the application's capabilities. A number of this improvements include:
 - Auido feedback for actions when receiving messages
 - Implementing a News API that sends through the latest headline every 'x' minutes into the messaging feed
 - Automated messages (similar to News API; a bot that would display automated messages at given increments)
 - Implement testing for all components (unsuccessfully implemented, removed due to not functioning correctly with firebase)
-- Creating and switching between sub-groups
+- Custom user roles
 - Video embedding
 - Audio messaging
 - Content filters
@@ -63,7 +66,7 @@ On the outset of this project, our group was aiming to implement many additional
 
 ## Group AA
 - Nathan Soares (45382417)
-> Front and Back-end development, Database Integration
+> Front and Back-end development, Firebase Auth setup, Database Integration
 - Michael Dimovski (45270708)
 > Design, testing, reports, misc tasks
 - Robert Kanepe (45364265)
@@ -71,9 +74,3 @@ On the outset of this project, our group was aiming to implement many additional
 - Bhavya Bhavsar (45560935)
 > Front and Back-end development, misc tasks
 
-
-***
-
-## TODO
-
-- Implement firebase access rules
