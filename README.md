@@ -36,11 +36,30 @@ Styling was done with a combination of css, inline styling and Material-UI for t
 
 The project is seperated into the functions folder which contains the Firebase/Express backend and middleware with which to call the api. The bulk of the functionality is contained in the src folder with the main base application files as well as the folders housing the styling, services and most importantly all the components. Calls to the custom Express backend are rare as the Firebase library handles the vast majority of the application's functionality in its current limited state. The backend is ready for further development as it is already setup with Firebase Functions.
 
+### `/functions`
+
+This directory holds the Express backend hosted with Firebase functions. In its current state it is quite bare, as the vast majority of the application's functionality is handled directly with the Firebase Auth api and the RTDB. In future, a number of controllers (e.g. permissions controller, aggregated user info controller, etc.) can be added to service those needs of the application that are best handled on the backend rather than the client.
+
+
+### `/public`
+
+This directory holds the publicly accessible assets which the application makes use of, such as the placeholder profile images and the font files. Any additional assets needed in future should be placed here, and can be accessed from the client as if they were in the root directory (e.g. `<img src ="/smile.png">`).
+
+### `/src` 
+
+This directory holds the individual components and styling necessary for the application to render on the client in the `/components` and `/css` subdirectories, respectively. Additionally, the `/services` directory holds a test service function for accessing the backend API. As the project develops, this will expand to provide helper functions for the necessary backend operations that the client can pass off. 
+
+The `App.js` file is the base component which determines the routing for the application to the login page, home page or dashboard based on the authentication status of the user. New 'pages' of the application can added to this file with the appropriate routing upon creating new components. The key components that are rendered are the `Home.js` and `DashboardView.js` files, which display the logged in screen and main application, respectively. The dashboard relies on the `dbChannelCol.js` and `dbMessagesCol.js`, which implement the majority of the application's functionality. Future development will likely be focused on these two components and their subcomponents (e.g. `createChannelForm.js`).
+
 ### Data model
 
 The client stores a live cache of the Firebase Realtime database (RTDB) in the variables userData and groupData. These variables effectively mirror the database structure of the RTDB, however only fetches the data that it needs as it is requested (for example, the messages for a certain channel of a certain group are only acquired when that channel is selected, and only the messages submitted since the user was last in that channel are requested to save bandwidth)
 
-In keeping with the suggested method of storing data in the Firebase RTDB, there are multiple copies of data in different places in order to accelerate indexing (for example, the list of all users is kept in the `/users` database directory while the users of a particular group are also listed in the `/members` section of a group directory).
+In keeping with the suggested method of storing data in the Firebase RTDB, there are multiple copies of data in different places in order to accelerate indexing (for example, the list of all users is kept in the `/users` database directory while the userIDs of a particular group's members are also listed in the `/members` section of a group directory).
+
+### Security Rules
+
+The Firebase Functions routes and Firebase RTDB are protected by the Firebase security rules, which limit access to the database and api based on the authentication status of the user. Currently this is set to allow any request from any authenticated user in the interest of keeping the application accessible and in preperation for further development of the user roles/permissions aspect of the application.
 
 ### Components
 - Spinner: displayed to users between components loading.
@@ -71,8 +90,11 @@ On the outset of this project, our group was aiming to implement further additio
 
 
 ## Group AA
+
+Most of our communication took place via Discord, where we regularly updated each other on the development of each of our sections of work. We often shared pictures or short videos sharing what functionality we were working on had had recently completed, and communicated requests to each other on what aspects of the application needed to be completed before moving onto the next area of development. A brief rundown of our roles is as follows:
+
 - Nathan Soares (45382417)
-> Front and Back-end development, Firebase Auth setup, Database Integration
+> Front and Back-end development (Dashboard layout, Firebase Auth setup, Database Integration), 
 - Michael Dimovski (45270708)
 > Design, testing, reports, misc tasks
 - Robert Kanepe (45364265)
