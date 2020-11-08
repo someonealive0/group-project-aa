@@ -47,7 +47,7 @@ The project is seperated into the functions folder which contains the middleware
 - Firebase: Below is a screenshot of an example realtime database in firebase
 ![Firebase](SCREENSHOTS/firebase.png)
 
-Check the SCREENSHOTS folder for more images of the application in action.
+Check the [SCREENSHOTS](SCREENSHOTS) folder out for more images of the application in action.
 
 ## Next Steps in the Future
 On the outset of this project, our group was aiming to implement many additional features and functionality compared to what was achieved in the end. The group hoped to create a much more complex web application but understood that the limited time would result in a less featured MVP. The deployed application contains the base components for the application but our proposal listed some more comprehensive additions that we would like to add in the future including:
