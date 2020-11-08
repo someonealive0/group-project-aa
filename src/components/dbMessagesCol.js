@@ -141,9 +141,9 @@ const DBMessagesCol = ({ user, currentChannel, userData, updateUserData }) => {
         <div className="dbMessagesCol">
             <div className="dbColHeader">
                 {currentChannel ? <div className="dbCurrentChannel">
-                    <span className="dbCurrentChannelIcon">#</span>
-                    <span className="dbCurrentChannelName">{currentChannel ? currentChannel.channelData.name : <></>}</span>
-                    <span className="dbChannelDesc">{currentChannel ? currentChannel.channelData.description : <></>}</span>
+                    <div className="dbCurrentChannelIcon"><span>#</span></div>
+                    <div className="dbCurrentChannelName"><span>{currentChannel ? currentChannel.channelData.name : <></>}</span></div>
+                    <div className="dbChannelDesc"><span>{currentChannel ? currentChannel.channelData.description : <></>}</span></div>
                 </div> : <></>}
             </div>
 

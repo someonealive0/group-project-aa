@@ -84,7 +84,7 @@ const Register = () => {
           setSignupDetails(initialState)
           setPasswordRepeat('')
           console.log("signed up")
-        }).catch((error) => console.log(error.message))
+        }).catch((error) => alert(error.message))
       } else {
         console.log("Username taken")
         alert("Username taken")

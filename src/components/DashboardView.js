@@ -85,9 +85,9 @@ const DashboardView = () => {
     if (user === null) return (<Redirect to="/" />) //Redirect to landing page if user logged out
     if (user === undefined) return (<></>) //User hasn't initialised yet
     return (
-        <div className="dbWrapper">
-            <div className="dbAppname">Lighthouse</div>
-            <div className="dbMainContent">
+        <table className="dbWrapper">
+            <tr className="dbAppname">Lighthouse</tr>
+            <tr className="dbMainContent">
                 <div className="dbGroupCol">
                     <div className="dbGroupHome">
                         <img className="dbGroupHomeImg" src="/logo.png"></img>
@@ -123,8 +123,8 @@ const DashboardView = () => {
                         )) : <></>}
                     </ul></div>
                 </div>            
-            </div>
-        </div>
+            </tr>
+        </table>
     )
 }
 

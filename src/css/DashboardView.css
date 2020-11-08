@@ -9,8 +9,9 @@ body {
     margin: 0;
     padding: 0;
     height: 100vh;
-    display: flex;
-    flex-flow: column nowrap;
+    display: table;
+    border-collapse: collapse;
+    width: 100%;
 }
 
 .dbHeader, .dbAppname {
@@ -22,7 +23,6 @@ body {
 
 .dbAppname {
     font-weight: 700;
-    padding-left: 10px;
     font-size: 1.3rem;
 }
 
@@ -30,8 +30,9 @@ body {
     margin: 0;
     padding: 0;
     background-color: rgb(32, 34, 37);
-    width: 100%;
-    height: calc(100% - 32px);
+    height: 100vh;
+    min-height: calc(100vh-32px);
+    max-height: calc(100vh - 32px);
     display: flex;
     flex-flow: row nowrap;
 }
@@ -45,6 +46,7 @@ body {
     display: flex;
     flex-flow: column nowrap;
     flex-shrink: 0;
+    flex-grow: 0;
 }
 
 .dbGroupHome {
@@ -179,6 +181,8 @@ body {
     border-radius: 13px 0 0 0;
     display: flex;
     flex-flow: column nowrap;
+    flex-grow: 0;
+    flex-shrink: 1;
 }
 
 .dbColHeader {
@@ -328,15 +332,22 @@ body {
     flex-grow: 1;
     display: flex;
     flex-flow: column nowrap;
+    flex-shrink: 1;
+}
+
+.dbMessagesCol .dbColHeader {
+    width: fit-content;
 }
 
 .dbCurrentChannel {
-    width: fit-content;
     height: 100%;
+    width: fit-content;
     display: flex;
-    flex-flow: row nowrap;
+    flex-flow: row wrap;
     align-items: center;
     font-weight: 500;
+    overflow: hidden;
+    max-width: max-content;
 }
 
 .dbCurrentChannelIcon {
@@ -348,22 +359,40 @@ body {
     font-size: 2.75rem;
     font-weight: 500;
     text-align: center;
+    height: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.dbCurrentChannelIcon span {
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .dbCurrentChannelName {
     margin: 0;
     padding: 0;
-    flex-grow: 1;
+    width: fit-content;
+    height: 100%;
     font-size: 1.5rem;
     font-weight: 500;
     white-space: nowrap;
+    display: flex;
+    flex-flow: row wrap;
+    word-break: break-all;
+    word-wrap: break-word;
+    margin-right: 30px;
+}
+
+.dbCurrentChannelName span {
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .dbChannelDesc {
     margin: 0;
-    margin-left: 20px;
+    margin-left: 0px;
     padding: 5px 0px 5px 10px;
-    width: 100%;
     height: auto;
     text-align: center;
     font-size: 1.25rem;
@@ -549,6 +578,11 @@ body {
     background-color: rgb(58, 62, 68);
 }
 
+.dbMsgListEmpty {
+    margin-left: 20px;
+    font-weight: 700;
+}
+
 .dbSubmitMsg {
     margin: 0 25px 36px 25px;
     padding: 0;
@@ -620,6 +654,7 @@ body {
     display: flex;
     flex-flow: column nowrap;
     height: 100%;
+    flex-shrink: 1;
 }
 
 .dbUsersCol .dbColHeader {
