@@ -39,7 +39,7 @@ const Home = () => {
     return (
         <div style={{margin: "20px"}}>
             {console.log("home user (shouldn't be null)", user)}
-            <h1>Signed in as {currUser.uid}</h1> 
+            <h1>Signed in as {currUser.email}</h1> 
             <p>Welcome to Lighthouse. What would you like to do?</p>
             <ButtonGroup>
                 <Link to='/me'><Button>User Profile</Button></Link>

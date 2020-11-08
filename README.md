@@ -20,7 +20,34 @@ The MVP was able to include the functionality we aimed for at the outset in the 
 As mentioned, the limited project timeline meant we needed to work efficiently. We first set up the firebase and Github repositories, created a base application and implemented some basic functionality. We then decided on what features we would like to implement and what was possible in the given timeframe. With the remaining time we populated the database, implemented the listed features, revised the features, implemented some styling and worked on more (some unsuccessfully, which we have included below to look at in the future).
 
 ## Guide to Project Source Code
+The application is simple by nature as an instant messaing platform.
+Users are able to:
+- Sign in
+- Log out
+- View their user profile
+- Go to the dashboard where they can message groups and rooms in real-time
 
+The dashboard is the main functionality of the application and where users will spend most of thier time. Users are able to view and join chats in groups as well as rooms within these groups to futher distinguish certain chat rooms between users. All messages appear in real time after a users sends a message with timestamps that update too. Users can tage each other and delete messages by pressing the trash can next to any of their messages which will remove it form the conversation.
+
+Styling was done with a combination of css, inline styling and Material-UI for the bulk of the work, which gave us a clean looking application with a relatively quick styling process and design modularity and customisability.
+
+The project is seperated into the functions folder which contains the middleware and controller for the api. The bulk of the functionality is contained in the src folder with the main base application files as well as the folders housing the styling, services and most importantly all the components. 
+
+### Components
+- Spinner: displayed to users between components loading.
+![Spinner](SCREENSHOTS/spinner.png)
+- Login form: Dispayed if no user is logged in, users can input their information and login or choose to register. 
+![LoginForm](SCREENSHOTS/Login Screen.png)
+- Registration form: Users can inout their username, email and password to register with the application which registers a user into firebase.
+![RegistrationForm](SCREENSHOTS/Registration Screen.png)
+- Home: This is the fisrt page a user sees when they login. They can view their user profile, go to the dashboard or logout.
+![Home](SCREENSHOTS/Home Screen.png)
+- Dashboard: The dashboard is the main component of the application. The user can navigate between groups and chat rooms within these groups by clicking on the icons and rooms. Users can post messages into their groups and chat rooms which are logged and timestamps are displayed in real-time. Users can tag each other and also delete messages.
+![Dashboard](SCREENSHOTS/Dashboard - message timestamps.png)
+- Firebase: Below is a screenshot of an example realtime database in firebase
+![Firebase](SCREENSHOTS/firebase.png)
+
+Check the SCREENSHOTS folder for more images of the application in action.
 
 ## Next Steps in the Future
 On the outset of this project, our group was aiming to implement many additional features and functionality compared to what was achieved in the end. The group hoped to create a much more complex web application but understood that the limited time would result in a less featured MVP. The deployed application contains the base components for the application but our proposal listed some more comprehensive additions that we would like to add in the future including:
