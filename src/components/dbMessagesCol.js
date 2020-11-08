@@ -148,7 +148,7 @@ const DBMessagesCol = ({ user, currentChannel, userData, updateUserData }) => {
             </div>
 
             <div className="dbMsgList" ref={msgListRef}><ul>
-                {currentChannel && messageCache[currentChannel.channelID] ? messageCache[currentChannel.channelID].map(({ msgID, msgDetails }, index) => {
+                {currentChannel && messageCache[currentChannel.channelID] && messageCache[currentChannel.channelID].length != 0 ?  messageCache[currentChannel.channelID].map(({ msgID, msgDetails }, index) => {
                     let date = new Date(msgDetails.time)
                     date = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear() //Formatted time as DD/MM/YYYY
                     
@@ -177,7 +177,7 @@ const DBMessagesCol = ({ user, currentChannel, userData, updateUserData }) => {
                             : <></>}
                         </li>
                     )
-                }) : <></>}
+                }) : <h1 className="dbMsgListEmpty">Be the first to message this channel!</h1>}
             </ul><div ref={messagesEndRef} /></div>
 
             

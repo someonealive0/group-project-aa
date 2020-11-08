@@ -75,6 +75,8 @@ const Register = () => {
             "groups": []
           }).catch((error) => console.log(error))
 
+          firebase.database().ref("groupData").child("allChat/members/" + result.user.uid).set(true)
+
           var dbUserObj = {}
           dbUserObj[usernameLC] = result.user.uid
           dbUsersRef.update(dbUserObj)

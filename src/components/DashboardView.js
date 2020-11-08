@@ -43,14 +43,17 @@ const DashboardView = () => {
 
         //Setup listener for updates to groupData -- should eventually only grab groups the user is a part of
         if (groupData.empty) {
-            firebase.database().ref('groupData').on("value", (snapshot) => { setGroupData(snapshot.val()) })
+            firebase.database().ref('groupData').on("value", (snapshot) => { 
+                setGroupData(snapshot.val())
+                setCurrentGroup({"id": "allChat"}) 
+            })
         }
 
         return () => { unsubscribe(); groupRef.off() }
     }, [user])
 
     useEffect(() => {
-        if (currentGroup) {
+        if (currentGroup && groupData[currentGroup.id]) {
             const mainChannel = groupData[currentGroup.id].channels
             const [channelID, channelData] = Object.entries(mainChannel)[0]
             setCurrentChannel({ "channelID": channelID, "channelData": channelData })
