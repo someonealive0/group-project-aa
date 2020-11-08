@@ -18,6 +18,7 @@ const Register = () => {
   const initialState = { username: '', password: '', email: '' }
   const [signupDetails, setSignupDetails] = useState(initialState)
   const [passwordRepeat, setPasswordRepeat] = useState('')
+  const maxUsernameLength = 25
 
   const handleClickOpen = (event) => {
     event.preventDefault()
@@ -108,6 +109,11 @@ const Register = () => {
             label="Username"
             type="text"
             value={signupDetails.username}
+            inputProps={{
+              maxLength: maxUsernameLength
+            }}
+            helperText={`${maxUsernameLength-signupDetails.username.length}/${maxUsernameLength} characters remaining`}
+            autoComplete='off'
             fullWidth
             onChange={(e) => setSignupDetails({ ...signupDetails, 'username': e.target.value })}
           />
@@ -127,6 +133,7 @@ const Register = () => {
             id="password"
             label="Password"
             type="password"
+            helperText={`Minimum 6 characters`}
             value={signupDetails.password}
             fullWidth
             onChange={(e) => setSignupDetails({ ...signupDetails, 'password': e.target.value })}
