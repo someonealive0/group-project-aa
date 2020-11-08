@@ -36,6 +36,12 @@ Styling was done with a combination of css, inline styling and Material-UI for t
 
 The project is seperated into the functions folder which contains the Firebase/Express backend and middleware with which to call the api. The bulk of the functionality is contained in the src folder with the main base application files as well as the folders housing the styling, services and most importantly all the components. Calls to the custom Express backend are rare as the Firebase library handles the vast majority of the application's functionality in its current limited state. The backend is ready for further development as it is already setup with Firebase Functions.
 
+### Data model
+
+The client stores a live cache of the Firebase Realtime database (RTDB) in the variables userData and groupData. These variables effectively mirror the database structure of the RTDB, however only fetches the data that it needs as it is requested (for example, the messages for a certain channel of a certain group are only acquired when that channel is selected, and only the messages submitted since the user was last in that channel are requested to save bandwidth)
+
+In keeping with the suggested method of storing data in the Firebase RTDB, there are multiple copies of data in different places in order to accelerate indexing (for example, the list of all users is kept in the `/users` database directory while the users of a particular group are also listed in the `/members` section of a group directory).
+
 ### Components
 - Spinner: displayed to users between components loading.
 ![Spinner](SCREENSHOTS/spinner.png)
