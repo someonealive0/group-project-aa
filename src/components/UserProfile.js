@@ -27,7 +27,7 @@ const UserProfile = () => {
         <div>
             <Card className='user-profile-card'>
                 <CardContent className='user-profile-pic-holder'><img className='user-profile-pic' src={imgsrc}></img></CardContent>
-                <CardContent className='user-card-content'>{currUser.uid}, {userDetails ? userDetails.username : ""}</CardContent>
+                <CardContent className='user-card-content'>{userDetails ? userDetails.username : ""}</CardContent>
                 <CardContent className='btn-container'><Button classname='edit-btn' variant='contained' color='primary'>Edit Profile</Button></CardContent>
                 <img src="/backInBlack.png" style={{padding:"10px"}} onClick={event => window.location.href='/home'}></img>
             </Card>

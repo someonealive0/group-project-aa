@@ -18,20 +18,14 @@ margin: 10px 0px;
 const ButtonGroup = styled.div`display: block, margin:auto`
 
 const Home = () => {
-    const [user, setUser] = useState(undefined)
+    const [userDetails, setUserDetails] = useState(undefined)
+
     const currUser = useContext(userAuth)
-    // useEffect(() => {
-    //     const unsubscribe = firebase.auth().onAuthStateChanged((authState) => {
-    //         if (authState) {
-    //             console.log("Signed in as", authState)
-    //             setUser(authState)
-    //         } else {
-    //             console.log("No user", user)
-    //             setUser(null)
-    //         }
-    //     })
-    //     return () => unsubscribe()
-    // }, [])
+    useEffect(() => {
+        if (currUser) firebase.database().ref("userData").child(currUser.uid).on("value",(snapshot) => {
+            setUserDetails(snapshot.val())
+        })
+    }, [currUser])
     console.log('currUser', currUser);
     if (currUser === undefined) return (<></>) //User hasn't initialised yet
     else if (currUser === null) return (<Redirect to="/" />) //User is logged out, redirect to landing page
@@ -39,7 +33,7 @@ const Home = () => {
     return (
         <div style={{margin: "20px"}}>
             {console.log("home user (shouldn't be null)", user)}
-            <h1>Signed in as {currUser.email}</h1> 
+            <h1>Signed in as {userDetails ? userDetails.username : ""}</h1> 
             <p>Welcome to Lighthouse. What would you like to do?</p>
             <ButtonGroup>
                 <Link to='/me'><Button>User Profile</Button></Link>
