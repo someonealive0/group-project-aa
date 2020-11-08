@@ -32,7 +32,6 @@ const Home = () => {
     else
     return (
         <div style={{margin: "20px"}}>
-            {console.log("home user (shouldn't be null)", user)}
             <h1>Signed in as {userDetails ? userDetails.username : ""}</h1> 
             <p>Welcome to Lighthouse. What would you like to do?</p>
             <ButtonGroup>
