@@ -196,6 +196,35 @@ body {
 
 .dbChannelCol .dbColHeader {
     border-radius: 10px 0 0 0;
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.dbChannelAdd {
+    color: rgb(185, 187, 190);
+    display: flex;
+    flex-direction: column nowrap;
+    margin: auto;
+    margin-right: 20px;
+    padding: 0;
+    width: fit-content;
+}
+
+.dbChannelAddIcon {
+    margin: 0;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    background-color: rgb(185, 187, 190);
+    color: rgb(64, 68, 75);
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.dbChannelAddIcon:hover {
+    background-color: rgb(220, 221, 222);
 }
 
 .dbGroupName {
@@ -334,20 +363,13 @@ body {
     flex-flow: column nowrap;
     flex-shrink: 1;
 }
-
-.dbMessagesCol .dbColHeader {
-    width: fit-content;
-}
-
 .dbCurrentChannel {
     height: 100%;
-    width: fit-content;
     display: flex;
     flex-flow: row wrap;
     align-items: center;
     font-weight: 500;
     overflow: hidden;
-    max-width: max-content;
 }
 
 .dbCurrentChannelIcon {

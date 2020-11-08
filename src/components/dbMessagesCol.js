@@ -66,7 +66,7 @@ const DBMessagesCol = ({ user, currentChannel, userData, updateUserData }) => {
 
                     // Check for hashtags
                     const message = { "msgID": snapshot.key, "msgDetails": snapshot.val() }
-                    const prunedContent = reactStringReplace(message.msgDetails.content.trim().toLowerCase(), regexMentions, (match, i) => (
+                    const prunedContent = reactStringReplace(message.msgDetails.content.trim(), regexMentions, (match, i) => (
                         !usernames["*empty"] && usernames[match.toLowerCase()] ? 
                             <span key={message.msgID + i} className="dbMsgMention">@{match}</span> : `@${match}`
                     ))
@@ -85,7 +85,7 @@ const DBMessagesCol = ({ user, currentChannel, userData, updateUserData }) => {
                     const changedMsgID = snapshot.key
 
                     const message = { "msgID": changedMsgID, "msgDetails": snapshot.val() }
-                    const prunedContent = reactStringReplace(message.msgDetails.content.trim().toLowerCase(), regexMentions, (match, i) => (
+                    const prunedContent = reactStringReplace(message.msgDetails.content.trim(), regexMentions, (match, i) => (
                         !usernames["*empty"] && usernames[match.toLowerCase()] ? <span className="dbMsgMention">@{match}</span> : `@${match}`
                     ))
 

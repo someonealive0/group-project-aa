@@ -1,93 +1,111 @@
-import React from "react";
-import { useState } from "react";
-import * as firebase from "firebase";
-import { Redirect, Link } from "react-router-dom";
-import Register from "./Register";
+import React, { useState, useEffect, useRef } from 'react'
+import * as firebase from 'firebase'
+import { Redirect, Link } from 'react-router-dom';
 
+//Material-UI
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
-//JavaScript based styling
-import styles from "./styles/styles";
-import Fade from "@material-ui/core/Fade";
-//Material UI
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
+const CreateChannelForm = ({ currentGroup }) => {
+  const [open, setOpen] = useState(false)
+  const initialState = { "name": '', "description": '' }
+  const [channelDetails, setChannelDetails] = useState(initialState)
+  const charLimit = 30
 
-
-const LoginForm = () => {
-  const [showForm, setShowForm] = useState(false)
-  const classes = styles();
-  const [loginDetails, setLoginDetails] = useState({ email: "", password: "" });
-  const handleSubmit = () => {
-    console.log(loginDetails);
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(loginDetails.email, loginDetails.password)
-      .then((result) => {
-        console.log("logged in");
-      })
-      .catch((error) => alert(error.message));
+  const handleClickOpen = (event) => {
+    event.preventDefault()
+    setOpen(true);
   };
-  
-  setTimeout(() => {
-    setShowForm(true)
-  }, 3000);
+
+  const handleClose = () => {
+    setOpen(false);
+    setChannelDetails(initialState)
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    const { name, description } = { ...channelDetails }
+
+    //Check for empty fields
+    if (!(name && description)) {
+      alert("Missing field")
+      console.log("Missing field")
+      return
+    }
+
+    //Validate channel name
+    if (!(name.length > 0 && name.length <= charLimit)) {
+      console.log("Invalid channel name")
+      alert("Invalid channel name")
+      return
+    }
+
+    //Validate channel description
+    if (!(description.length > 0 && description.length <= charLimit)) {
+      console.log("Invalid description")
+      alert("Invalid description")
+      return
+    }
+
+    const ref = firebase.database().ref("groupData").child(currentGroup.id).child("channels").push(channelDetails)
+    console.log(ref)
+    setOpen(false)
+    setChannelDetails(initialState)
+  }
+
+  if (!currentGroup) return (<></>)
   return (
     <>
-      <Fade in={showForm}>
-        <Dialog open={true} aria-labelledby="form-dialog-title" className='popup-form'>
-          <DialogTitle id="form-dialog-title">Login</DialogTitle>
+      <div className="dbChannelAdd" onClick={handleClickOpen}><div className="dbChannelAddIcon">+</div></div>
 
-          <DialogContent>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="email"
-              label="Email"
-              type="text"
-              value={loginDetails.email}
-              fullWidth
-              onChange={(e) =>
-                setLoginDetails({ ...loginDetails, email: e.target.value })
-              }
-            />
+      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+        <DialogTitle id="form-dialog-title">Add Channel</DialogTitle>
 
-            <TextField
-              margin="dense"
-              id="password"
-              label="Password"
-              type="password"
-              value={loginDetails.password}
-              fullWidth
-              onChange={(e) =>
-                setLoginDetails({ ...loginDetails, password: e.target.value })
-              }
-            />
-          </DialogContent>
+        <DialogContent>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Channel name"
+            type="text"
+            inputProps={{
+              maxLength: charLimit
+            }}
+            autoComplete='off'
+            helperText={`${charLimit-channelDetails.name.length}/${charLimit} characters remaining`}
+            value={channelDetails.name}
+            fullWidth
+            onChange={(e) => setChannelDetails({ ...channelDetails, 'name': e.target.value })}
+          />
 
-          <DialogActions>
-            <Button
-              onClick={handleSubmit}
-              color="primary"
-              variant='contained'
-              className={classes.submitBtn}
-            >
-              Login
-            </Button>
-          </DialogActions>
-          <DialogContent>
-            <DialogContentText align="center">
-              New user? <Register />
-            </DialogContentText>
-          </DialogContent>
-        </Dialog>
-      </Fade>
+          <TextField
+            margin="dense"
+            id="description"
+            label="Channel description"
+            type="text"
+            inputProps={{
+              maxLength: charLimit
+            }}
+            autoComplete='off'
+            helperText={`${charLimit-channelDetails.description.length}/${charLimit} characters remaining`}
+            value={channelDetails.description}
+            fullWidth
+            onChange={(e) => setChannelDetails({ ...channelDetails, 'description': e.target.value })}
+          />
+        </DialogContent>
+
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">Cancel</Button>
+          <Button onClick={handleSubmit} color="primary">Done</Button>
+        </DialogActions>
+
+      </Dialog>
     </>
   );
-};
+}
 
-export default LoginForm;
+export default CreateChannelForm

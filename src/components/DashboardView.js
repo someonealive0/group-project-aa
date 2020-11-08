@@ -38,15 +38,21 @@ const DashboardView = () => {
                     newUserData[user.uid] = snapshot.val()
                     return newUserData
                 })
+                console.log("got current details")
             })
         }
 
         //Setup listener for updates to groupData -- should eventually only grab groups the user is a part of
         if (groupData.empty) {
-            firebase.database().ref('groupData').on("value", (snapshot) => { 
+            firebase.database().ref('groupData').on("value", (snapshot) => {
                 setGroupData(snapshot.val())
-                setCurrentGroup({"id": "allChat"}) 
+
+                if (groupData.empty) {
+                    const [id, info] = Object.entries(snapshot.val()['allChat'].channels)[0]
+                    setCurrentChannel({ "channelID": id, "channelData": info })
+                }
             })
+            setCurrentGroup({ "id": "allChat" })
         }
 
         return () => { unsubscribe(); groupRef.off() }
@@ -54,9 +60,13 @@ const DashboardView = () => {
 
     useEffect(() => {
         if (currentGroup && groupData[currentGroup.id]) {
-            const mainChannel = groupData[currentGroup.id].channels
-            const [channelID, channelData] = Object.entries(mainChannel)[0]
-            setCurrentChannel({ "channelID": channelID, "channelData": channelData })
+            const channels = groupData[currentGroup.id].channels ?
+                Object.entries(groupData[currentGroup.id].channels) : null
+
+            if (channels && channels.length != 0) {
+                const [channelID, channelData] = channels[0]
+                setCurrentChannel({ "channelID": channelID, "channelData": channelData })
+            }
 
             //Update userData for users in current group (get profileImg, usernames, etc.)
             Object.entries(groupData[currentGroup.id].members).map(([userID, exists]) => {
@@ -86,44 +96,44 @@ const DashboardView = () => {
     if (user === undefined) return (<></>) //User hasn't initialised yet
     return (
         <table className="dbWrapper">
-            <tr className="dbAppname">Lighthouse</tr>
-            <tr className="dbMainContent">
-                <div className="dbGroupCol">
-                    <div className="dbGroupHome">
-                        <img className="dbGroupHomeImg" src="/logo.png"></img>
+            <tbody><tr><td className="dbAppname">Lighthouse</td></tr>
+                <tr><td className="dbMainContent">
+                    <div className="dbGroupCol">
+                        <div className="dbGroupHome">
+                            <img className="dbGroupHomeImg" src="/logo.png"></img>
+                        </div>
+                        <div className="dbGroupList"><ul>
+                            {!groupData.empty && Object.entries(groupData).map(([groupID, groupDetails], index) => (
+                                <li key={index}><div className={currentGroup && currentGroup.id == groupID ? "dbGroup dbGroupCurrent" : "dbGroup"}
+                                    onClick={() => setCurrentGroup({ "id": groupID })}>
+                                    <img className="dbGroupImg" src={groupDetails.groupImg}></img>
+                                    <div className="tooltip"><span className="tooltiptext"><span>{groupDetails.groupName}</span></span></div>
+                                </div></li>
+                            ))}
+                            <li><img style={{ display: "block", marginLeft: "auto", marginRight: "auto" }} onClick={event => window.location.href = '/home'} src="/back.png"></img></li>
+                        </ul></div>
                     </div>
-                    <div className="dbGroupList"><ul>
-                        {!groupData.empty && Object.entries(groupData).map(([groupID, groupDetails], index) => (
-                            <li key={index}><div className={currentGroup && currentGroup.id == groupID ? "dbGroup dbGroupCurrent" : "dbGroup"} 
-                                onClick={() => setCurrentGroup({ "id": groupID })}>
-                                <img className="dbGroupImg" src={groupDetails.groupImg}></img>
-                                <div className="tooltip"><span className="tooltiptext"><span>{groupDetails.groupName}</span></span></div>
-                            </div></li>
-                        ))}
-                        <li><img style={{display: "block", marginLeft: "auto", marginRight: "auto"}}onClick={event => window.location.href='/home'} src="/back.png"></img></li>
-                    </ul></div>
-                </div>
 
-                <DBChannelCol authUserData={userData[user.uid]} currentChannel={currentChannel} setCurrentChannel={setCurrentChannelFn}
-                    groupName={currentGroup && groupData[currentGroup.id] ? groupData[currentGroup.id].groupName : ""} channels={currentGroup && groupData[currentGroup.id] ? groupData[currentGroup.id].channels : null} />
+                    <DBChannelCol authUserData={userData[user.uid]} currentChannel={currentChannel} setCurrentChannel={setCurrentChannelFn} currentGroup={currentGroup}
+                        groupName={currentGroup && groupData[currentGroup.id] ? groupData[currentGroup.id].groupName : ""} channels={currentGroup && groupData[currentGroup.id] ? groupData[currentGroup.id].channels : null} />
 
-                <DBMessagesCol user={user} currentChannel={currentChannel} userData={userData} updateUserData={updateUserData} />
+                    <DBMessagesCol user={user} currentChannel={currentChannel} userData={userData} updateUserData={updateUserData} />
 
-                <div className="dbUsersCol">
-                    <div className="dbColHeader"></div>
-                    <div className="dbUserList"><ul>
-                        {currentGroup && groupData[currentGroup.id] ? Object.entries(groupData[currentGroup.id].members).map(([groupUserID, exists], index) => (
-                            <li key={index} className="dbUserListItem">
-                                <div className="dbUser">
-                                    <div className="dbUserImg"><img src={userData[groupUserID] ? userData[groupUserID].profileImg : "/smile.png"} 
-                                        onError={(event) =>  event.target.src = '/smile.png'}></img></div>
-                                    <span className="dbUserListName">{userData[groupUserID] ? userData[groupUserID].username : ""}</span>
-                                </div>
-                            </li>
-                        )) : <></>}
-                    </ul></div>
-                </div>            
-            </tr>
+                    <div className="dbUsersCol">
+                        <div className="dbColHeader"></div>
+                        <div className="dbUserList"><ul>
+                            {currentGroup && groupData[currentGroup.id] ? Object.entries(groupData[currentGroup.id].members).map(([groupUserID, exists], index) => (
+                                <li key={index} className="dbUserListItem">
+                                    <div className="dbUser">
+                                        <div className="dbUserImg"><img src={userData[groupUserID] ? userData[groupUserID].profileImg : "/smile.png"}
+                                            onError={(event) => event.target.src = '/smile.png'}></img></div>
+                                        <span className="dbUserListName">{userData[groupUserID] ? userData[groupUserID].username : ""}</span>
+                                    </div>
+                                </li>
+                            )) : <></>}
+                        </ul></div>
+                    </div>
+                </td></tr></tbody>
         </table>
     )
 }
