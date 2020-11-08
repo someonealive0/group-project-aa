@@ -37,13 +37,13 @@ The project is seperated into the functions folder which contains the middleware
 - Spinner: displayed to users between components loading.
 ![Spinner](SCREENSHOTS/spinner.png)
 - Login form: Dispayed if no user is logged in, users can input their information and login or choose to register. 
-![LoginForm](SCREENSHOTS/Login Screen.png)
+![LoginForm](SCREENSHOTS/LoginScreen.png)
 - Registration form: Users can inout their username, email and password to register with the application which registers a user into firebase.
-![RegistrationForm](SCREENSHOTS/Registration Screen.png)
+![RegistrationForm](SCREENSHOTS/RegistrationScreen.png)
 - Home: This is the fisrt page a user sees when they login. They can view their user profile, go to the dashboard or logout.
-![Home](SCREENSHOTS/Home Screen.png)
+![Home](SCREENSHOTS/HomeScreen.png)
 - Dashboard: The dashboard is the main component of the application. The user can navigate between groups and chat rooms within these groups by clicking on the icons and rooms. Users can post messages into their groups and chat rooms which are logged and timestamps are displayed in real-time. Users can tag each other and also delete messages.
-![Dashboard](SCREENSHOTS/Dashboard - message timestamps.png)
+![Dashboard](SCREENSHOTS/DashboardTimestamps.png)
 - Firebase: Below is a screenshot of an example realtime database in firebase
 ![Firebase](SCREENSHOTS/firebase.png)
 
