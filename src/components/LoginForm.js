@@ -16,6 +16,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+const provider = new firebase.auth.GoogleAuthProvider();
 
 
 const LoginForm = () => {
@@ -32,10 +33,35 @@ const LoginForm = () => {
       })
       .catch((error) => alert(error.message));
   };
-  
+
   setTimeout(() => {
     setShowForm(true)
   }, 3000);
+
+  const handleGoogleSignin = () => {
+    firebase.auth().signInWithPopup(provider).then((result) => {
+      console.log("adding user to db")
+      const user = result.user
+      const username = user.email.slice(0, 5) + user.uid.slice(0, 5)
+
+      firebase.database().ref('userData').child(user.uid).set({
+        "username": username,
+        "email": user.email,
+        "profileImg": user.photoURL,
+        "groups": []
+      }).catch((error) => console.log(error))
+      console.log("updated userdata")
+
+      firebase.database().ref("groupData").child("allChat/members/" + result.user.uid).set(true)
+      console.log("updated groupdata")
+
+      const dbUserObj = {}
+      dbUserObj[username.toLowerCase()] = user.uid
+      firebase.database().ref('users').update(dbUserObj)
+
+    }).catch((error) => alert(error.message))
+  }
+
   return (
     <>
       <Fade in={showForm}>
@@ -80,6 +106,16 @@ const LoginForm = () => {
             </Button>
           </DialogActions>
           <DialogContent>
+
+            <DialogContentText align="center">
+              <Button
+                onClick={handleGoogleSignin}
+                color="primary"
+                variant='contained'
+                className={classes.submitBtn}
+              >Google sign-in</Button>
+            </DialogContentText>
+
             <DialogContentText align="center">
               New user? <Register />
             </DialogContentText>
